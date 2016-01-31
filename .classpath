@@ -12,7 +12,5 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.buildship.core.gradleclasspathcontainer"/>
-	<classpathentry kind="lib" path="/Users/dpyle/Downloads/okhttp-3.0.1.jar"/>
-	<classpathentry kind="lib" path="/Users/dpyle/Downloads/okio-1.6.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
