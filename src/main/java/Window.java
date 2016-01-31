@@ -200,8 +200,7 @@ public class Window extends JFrame {
 	}
 
 	public void change_boxes() {
-		int index = itemList.getSelectedIndex() + 1; // getSelectedIndex() is
-														// not 0 based
+		int index = itemList.getSelectedIndex();
 		int ID = mediaItems.get(index).objectID;
 		if (mediaItems.get(index).url != null) {
 			songUrl.setText(mediaItems.get(index).url.toString());
