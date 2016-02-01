@@ -30,10 +30,14 @@ public class SOAPClient {
 			+ "		</u:Browse>" + "	</s:Body>" + "</s:Envelope>";
 
 	public static SOAPClient getInstance(URL server) {
-		if (instance != null)
+		if (instance != null) {
+			if (!server.toString().equalsIgnoreCase(instance.serverURL.toString())) {
+				instance.serverURL = server;
+			}
 			return instance;
-		else
+		} else {
 			return new SOAPClient(server);
+		}
 	}
 
 	private URL serverURL;
@@ -77,6 +81,7 @@ public class SOAPClient {
 	}
 
 	public void processResults(String soapResponse) {
+		soapResponse = soapResponse.replace("&lt;", "<").replace("&gt;", ">");
 		items.clear();
 		
 		final String START_TAG = "<Result>";

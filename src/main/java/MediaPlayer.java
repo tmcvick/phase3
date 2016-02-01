@@ -45,4 +45,10 @@ public class MediaPlayer {
 	public void stop() {
 		player.stop();
 	}
+
+	public void pause() {
+		javax.media.Time time = player.getMediaTime();
+		player.stop();
+		player.setMediaTime(time);
+	}
 }
