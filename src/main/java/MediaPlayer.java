@@ -1,6 +1,5 @@
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Time;
 
 import javax.media.CannotRealizeException;
 import javax.media.Format;
@@ -49,7 +48,7 @@ public class MediaPlayer {
 
 	public void pause() {
 		javax.media.Time time = player.getMediaTime();
-		player.setMediaTime(time);
 		player.stop();
+		player.setMediaTime(time);
 	}
 }
