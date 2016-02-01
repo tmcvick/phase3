@@ -1,0 +1,6 @@
+*.class
+*.MF
+build/libs/team8.jar
+*.class
+*.lock
+*.class
