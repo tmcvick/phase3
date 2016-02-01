@@ -9,7 +9,7 @@ import org.junit.Test;
 
 public class SOAPClientTest {
 	private URL serverURL;
-	private ArrayList<MediaItem> returnedItems;
+	private ArrayList<MediaItem> returnedItems = new ArrayList<MediaItem>();
 
 	@Before
 	public void setUp() throws Exception {
@@ -34,7 +34,7 @@ public class SOAPClientTest {
 			fail("Returned items are not the size they should be.");
 		}
 		for (int i = 0; i < returnedItems.size(); i++) {
-			if (items.get(i) != returnedItems.get(i)) {
+			if (!items.get(i).title.equals(returnedItems.get(i).title)) {
 				fail("Returned items are not equal to what they should be.");
 			}
 		}
