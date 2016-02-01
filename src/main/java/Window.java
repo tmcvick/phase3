@@ -31,6 +31,7 @@ public class Window extends JFrame {
 	private SOAPClient soap;
 	private JScrollPane scrollPane;
 	private URL serverURL = null;
+	private MediaPlayer musicPlayer;
 
 	public URL getURL() {
 		return this.serverURL;
@@ -39,14 +40,21 @@ public class Window extends JFrame {
 	private ArrayList<MediaItem> mediaItems;
 	private JTextField songUrl;
 	private URL playUrl;
+	private boolean test = false;
 
 	
 	public void setItems(ArrayList<MediaItem> items) {
-		if (mediaItems != null) {
+		if (mediaItems != null && items != null) {
 			mediaItems.clear();
-			mediaItems.addAll(items);
-		} else {
-			mediaItems = items;
+			for(int i = 0; i < items.size(); i++)
+				mediaItems.add(items.get(i));
+		}else if(items == null)
+			return;
+		else {
+			mediaItems = new ArrayList<MediaItem>();
+			for(int i = 0; i < items.size(); i++)
+				mediaItems.add(items.get(i));
+			
 		}
 	}
 
@@ -85,10 +93,21 @@ public class Window extends JFrame {
 		});
 
 		JButton btnPlay = new JButton("Play");
+		btnPlay.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				musicPlayer = new MediaPlayer(playUrl);
+				musicPlayer.start();
+			}
+		});
 
 		JButton btnPause = new JButton("Pause");
 
 		JButton btnStop = new JButton("Stop");
+		btnStop.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				musicPlayer.stop();
+			}
+		});
 
 		scrollPane = new JScrollPane();
 
@@ -155,7 +174,8 @@ public class Window extends JFrame {
 		itemList = new JList<MediaItem>(listmodel);
 		itemList.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
-				change_boxes();
+				if(test == false)
+					change_boxes();
 			}
 		});
 
@@ -171,17 +191,24 @@ public class Window extends JFrame {
 			soap.serverURLDidChange(serverURL);
 		}
 
+		ArrayList<MediaItem> items = new ArrayList<MediaItem>();
 		try {
-			mediaItems = soap.request(Integer.parseInt(objectNum.getText()));
+			items = soap.request(Integer.parseInt(objectNum.getText()));
 		} catch (NumberFormatException e) {
-			
+			System.out.println("here is the error");
 			e.printStackTrace();
 		} catch (IOException e) {
-			
+			System.out.println("here is the error");
+
 			e.printStackTrace();
 		}
-
+		
+		setItems(items);
+		
+		test = true;
 		listmodel.clear();
+		test = false;
+		
 		for (int i = 0; i < mediaItems.size(); i++)
 			listmodel.addElement(mediaItems.get(i));
 		scrollPane.revalidate();

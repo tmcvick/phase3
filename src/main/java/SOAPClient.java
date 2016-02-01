@@ -72,11 +72,13 @@ public class SOAPClient {
 			System.err.println("Response code: " + response.code());
 			System.err.println("Response: " + response.message());
 		}
+		
 		return items;
 	}
 
 	public void processResults(String soapResponse) {
 		items.clear();
+		
 		final String START_TAG = "<Result>";
 		final String END_TAG = "</Result>";
 		int startIndex = soapResponse.indexOf(START_TAG) + START_TAG.length();
