@@ -101,6 +101,11 @@ public class Window extends JFrame {
 		});
 
 		JButton btnPause = new JButton("Pause");
+		btnPause.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				musicPlayer.pause();
+			}
+		});
 
 		JButton btnStop = new JButton("Stop");
 		btnStop.addActionListener(new ActionListener() {
