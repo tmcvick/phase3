@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Window.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">team8</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Window.java</span></div><h1>Window.java</h1><pre class="source lang-java linenums">
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+
+import javax.swing.DefaultListModel;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+public class Window extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JTextField inputUrl;
+	private JTextField objectNum;
+	private DefaultListModel&lt;MediaItem&gt; listmodel;
+	private JList&lt;MediaItem&gt; itemList;
+	private SOAPClient soap;
+	private JScrollPane scrollPane;
+<span class="nc" id="L33">	private URL serverURL = null;</span>
+	private MediaPlayer musicPlayer;
+
+	public URL getURL() {
+<span class="nc" id="L37">		return this.serverURL;</span>
+	}
+
+	private ArrayList&lt;MediaItem&gt; mediaItems;
+	private JTextField songUrl;
+	private URL playUrl;
+<span class="nc" id="L43">	private boolean test = false;</span>
+
+	
+	public void setItems(ArrayList&lt;MediaItem&gt; items) {
+<span class="nc bnc" id="L47" title="All 4 branches missed.">		if (mediaItems != null &amp;&amp; items != null) {</span>
+<span class="nc" id="L48">			mediaItems.clear();</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">			for(int i = 0; i &lt; items.size(); i++)</span>
+<span class="nc" id="L50">				mediaItems.add(items.get(i));</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">		}else if(items == null)</span>
+<span class="nc" id="L52">			return;</span>
+		else {
+<span class="nc" id="L54">			mediaItems = new ArrayList&lt;MediaItem&gt;();</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">			for(int i = 0; i &lt; items.size(); i++)</span>
+<span class="nc" id="L56">				mediaItems.add(items.get(i));</span>
+			
+		}
+<span class="nc" id="L59">	}</span>
+
+<span class="nc" id="L61">	public Window() {</span>
+
+		try {
+<span class="nc" id="L64">			serverURL = new URL(&quot;http://127.0.0.1:5001/upnp/control/content_directory&quot;);</span>
+<span class="nc" id="L65">		} catch (MalformedURLException e) {</span>
+<span class="nc" id="L66">			e.printStackTrace();</span>
+<span class="nc" id="L67">		}</span>
+
+		// SOAPClient Singleton instantiation
+<span class="nc" id="L70">		soap = SOAPClient.getInstance(serverURL);</span>
+
+<span class="nc" id="L72">		JLabel lblServerUrl = new JLabel(&quot;Server URL:&quot;);</span>
+
+<span class="nc" id="L74">		inputUrl = new JTextField();</span>
+<span class="nc" id="L75">		inputUrl.setText(&quot;http://127.0.0.1:5001/upnp/control/content_directory&quot;);</span>
+<span class="nc" id="L76">		inputUrl.setColumns(10);</span>
+
+<span class="nc" id="L78">		JLabel lblObjectId = new JLabel(&quot;Object ID:&quot;);</span>
+
+<span class="nc" id="L80">		objectNum = new JTextField();</span>
+<span class="nc" id="L81">		objectNum.setText(&quot;0&quot;);</span>
+<span class="nc" id="L82">		objectNum.setColumns(10);</span>
+
+<span class="nc" id="L84">		JButton btnRetrieve = new JButton(&quot;Retrieve&quot;);</span>
+<span class="nc" id="L85">		btnRetrieve.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+<span class="nc" id="L88">					submit_change();</span>
+<span class="nc" id="L89">				} catch (MalformedURLException e) {</span>
+<span class="nc" id="L90">					e.printStackTrace();</span>
+<span class="nc" id="L91">				}</span>
+<span class="nc" id="L92">			}</span>
+		});
+
+<span class="nc" id="L95">		JButton btnPlay = new JButton(&quot;Play&quot;);</span>
+<span class="nc" id="L96">		btnPlay.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent arg0) {
+<span class="nc" id="L98">				musicPlayer = new MediaPlayer(playUrl);</span>
+<span class="nc" id="L99">				musicPlayer.start();</span>
+<span class="nc" id="L100">			}</span>
+		});
+
+<span class="nc" id="L103">		JButton btnPause = new JButton(&quot;Pause&quot;);</span>
+<span class="nc" id="L104">		btnPause.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L106">				musicPlayer.pause();</span>
+<span class="nc" id="L107">			}</span>
+		});
+
+<span class="nc" id="L110">		JButton btnStop = new JButton(&quot;Stop&quot;);</span>
+<span class="nc" id="L111">		btnStop.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L113">				musicPlayer.stop();</span>
+<span class="nc" id="L114">			}</span>
+		});
+
+<span class="nc" id="L117">		scrollPane = new JScrollPane();</span>
+
+<span class="nc" id="L119">		songUrl = new JTextField();</span>
+<span class="nc" id="L120">		songUrl.setColumns(10);</span>
+<span class="nc" id="L121">		GroupLayout groupLayout = new GroupLayout(getContentPane());</span>
+<span class="nc" id="L122">		groupLayout.setHorizontalGroup(</span>
+<span class="nc" id="L123">			groupLayout.createParallelGroup(Alignment.LEADING)</span>
+<span class="nc" id="L124">				.addGroup(groupLayout.createSequentialGroup()</span>
+<span class="nc" id="L125">					.addContainerGap()</span>
+<span class="nc" id="L126">					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)</span>
+<span class="nc" id="L127">						.addGroup(groupLayout.createSequentialGroup()</span>
+<span class="nc" id="L128">							.addComponent(lblServerUrl, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L129">							.addPreferredGap(ComponentPlacement.RELATED)</span>
+<span class="nc" id="L130">							.addComponent(inputUrl, GroupLayout.PREFERRED_SIZE, 331, GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L131">						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 293, GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L132">					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)</span>
+<span class="nc" id="L133">						.addGroup(groupLayout.createSequentialGroup()</span>
+<span class="nc" id="L134">							.addGap(43)</span>
+<span class="nc" id="L135">							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)</span>
+<span class="nc" id="L136">								.addGroup(groupLayout.createSequentialGroup()</span>
+<span class="nc" id="L137">									.addComponent(btnPlay)</span>
+<span class="nc" id="L138">									.addGap(18)</span>
+<span class="nc" id="L139">									.addComponent(btnPause)</span>
+<span class="nc" id="L140">									.addPreferredGap(ComponentPlacement.UNRELATED)</span>
+<span class="nc" id="L141">									.addComponent(btnStop))</span>
+<span class="nc" id="L142">								.addGroup(groupLayout.createSequentialGroup()</span>
+<span class="nc" id="L143">									.addGap(100)</span>
+<span class="nc" id="L144">									.addComponent(lblObjectId)</span>
+<span class="nc" id="L145">									.addPreferredGap(ComponentPlacement.RELATED)</span>
+<span class="nc" id="L146">									.addComponent(objectNum, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L147">									.addPreferredGap(ComponentPlacement.UNRELATED)</span>
+<span class="nc" id="L148">									.addComponent(btnRetrieve))))</span>
+<span class="nc" id="L149">						.addGroup(groupLayout.createSequentialGroup()</span>
+<span class="nc" id="L150">							.addGap(6)</span>
+<span class="nc" id="L151">							.addComponent(songUrl, GroupLayout.PREFERRED_SIZE, 349, GroupLayout.PREFERRED_SIZE)))</span>
+<span class="nc" id="L152">					.addGap(49))</span>
+		);
+<span class="nc" id="L154">		groupLayout.setVerticalGroup(</span>
+<span class="nc" id="L155">			groupLayout.createParallelGroup(Alignment.LEADING)</span>
+<span class="nc" id="L156">				.addGroup(groupLayout.createSequentialGroup()</span>
+<span class="nc" id="L157">					.addContainerGap()</span>
+<span class="nc" id="L158">					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)</span>
+<span class="nc" id="L159">						.addComponent(lblServerUrl, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L160">						.addComponent(inputUrl, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L161">						.addComponent(lblObjectId, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L162">						.addComponent(objectNum, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L163">						.addComponent(btnRetrieve))</span>
+<span class="nc" id="L164">					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)</span>
+<span class="nc" id="L165">						.addGroup(groupLayout.createSequentialGroup()</span>
+<span class="nc" id="L166">							.addGap(46)</span>
+<span class="nc" id="L167">							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)</span>
+<span class="nc" id="L168">								.addComponent(btnPlay)</span>
+<span class="nc" id="L169">								.addComponent(btnPause)</span>
+<span class="nc" id="L170">								.addComponent(btnStop))</span>
+<span class="nc" id="L171">							.addGap(18)</span>
+<span class="nc" id="L172">							.addComponent(songUrl, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L173">						.addGroup(groupLayout.createSequentialGroup()</span>
+<span class="nc" id="L174">							.addGap(33)</span>
+<span class="nc" id="L175">							.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)))</span>
+<span class="nc" id="L176">					.addContainerGap())</span>
+		);
+<span class="nc" id="L178">		listmodel = new DefaultListModel&lt;MediaItem&gt;();</span>
+<span class="nc" id="L179">		itemList = new JList&lt;MediaItem&gt;(listmodel);</span>
+<span class="nc" id="L180">		itemList.addListSelectionListener(new ListSelectionListener() {</span>
+			public void valueChanged(ListSelectionEvent e) {
+<span class="nc bnc" id="L182" title="All 2 branches missed.">				if(test == false)</span>
+<span class="nc" id="L183">					change_boxes();</span>
+<span class="nc" id="L184">			}</span>
+		});
+
+<span class="nc" id="L187">		scrollPane.setViewportView(itemList);</span>
+<span class="nc" id="L188">		getContentPane().setLayout(groupLayout);</span>
+<span class="nc" id="L189">		setTitle(&quot;Media Player Application&quot;);</span>
+<span class="nc" id="L190">		pack();</span>
+<span class="nc" id="L191">	}</span>
+
+	public void submit_change() throws MalformedURLException {
+<span class="nc bnc" id="L194" title="All 2 branches missed.">		if (serverURL != new URL(inputUrl.getText())) {</span>
+<span class="nc" id="L195">			serverURL = new URL(inputUrl.getText());</span>
+<span class="nc" id="L196">			soap.serverURLDidChange(serverURL);</span>
+		}
+
+<span class="nc" id="L199">		ArrayList&lt;MediaItem&gt; items = new ArrayList&lt;MediaItem&gt;();</span>
+		try {
+<span class="nc" id="L201">			items = soap.request(Integer.parseInt(objectNum.getText()));</span>
+<span class="nc" id="L202">		} catch (NumberFormatException e) {</span>
+<span class="nc" id="L203">			System.out.println(&quot;here is the error&quot;);</span>
+<span class="nc" id="L204">			e.printStackTrace();</span>
+<span class="nc" id="L205">		} catch (IOException e) {</span>
+<span class="nc" id="L206">			System.out.println(&quot;here is the error&quot;);</span>
+
+<span class="nc" id="L208">			e.printStackTrace();</span>
+<span class="nc" id="L209">		}</span>
+		
+<span class="nc" id="L211">		setItems(items);</span>
+		
+<span class="nc" id="L213">		test = true;</span>
+<span class="nc" id="L214">		listmodel.clear();</span>
+<span class="nc" id="L215">		test = false;</span>
+		
+<span class="nc bnc" id="L217" title="All 2 branches missed.">		for (int i = 0; i &lt; mediaItems.size(); i++)</span>
+<span class="nc" id="L218">			listmodel.addElement(mediaItems.get(i));</span>
+<span class="nc" id="L219">		scrollPane.revalidate();</span>
+<span class="nc" id="L220">		scrollPane.repaint();</span>
+<span class="nc" id="L221">	}</span>
+
+	public void change_boxes() {
+<span class="nc" id="L224">		int index = itemList.getSelectedIndex();</span>
+<span class="nc" id="L225">		int ID = mediaItems.get(index).objectID;</span>
+<span class="nc bnc" id="L226" title="All 2 branches missed.">		if (mediaItems.get(index).url != null) {</span>
+<span class="nc" id="L227">			songUrl.setText(mediaItems.get(index).url.toString());</span>
+<span class="nc" id="L228">			playUrl = mediaItems.get(index).url;</span>
+		}
+<span class="nc" id="L230">		objectNum.setText(Integer.toString(ID));</span>
+<span class="nc" id="L231">	}</span>
+
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
