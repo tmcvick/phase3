@@ -1,6 +1,9 @@
-*.class
-*.MF
+.classpath
+.MF
 build/libs/team8.jar
-*.class
-*.lock
-*.class
+.lock
+.gradle
+bin
+build
+.project
+.settings
