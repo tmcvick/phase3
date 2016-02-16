@@ -6,6 +6,7 @@ import java.awt.BorderLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JPanel;
+import javax.swing.JLabel;
 
 public class MyFrame extends JFrame {
 	public MyFrame() {
@@ -27,6 +28,7 @@ public class MyFrame extends JFrame {
 					.addContainerGap())
 		);
 		getContentPane().setLayout(groupLayout);
+		pack();
 	}
 	private static final long serialVersionUID = 1L;
 }
