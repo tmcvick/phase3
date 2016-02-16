@@ -1,0 +1,40 @@
+
+
+<settings>
+
+	<serverURL>http://127.0.0.1:5001/upnp/control/content_directory</serverURL>
+	
+	<currentUser>
+		<admin>true</admin>
+		<PIN>777</PIN>
+		<username>defaultUser</username>
+		<access>Unrestricted</access>
+		<imageFileName></imageFileName>
+		<favorites></favorites>
+	</currentUser>
+	
+	<albums>
+		<album access="Unrestricted">
+			<title>Test</title>
+			<artist>Dylan Pyle</artist>
+			<ID>7</ID>
+		</album>
+		<album access="Restricted">
+			<title>Restricted Test</title>
+			<artist>Dylan Pyle</artist>
+			<ID>13</ID>
+		</album>
+	</albums>
+	
+	<users>
+		<user>
+			<admin>true</admin>
+			<PIN>777</PIN>
+			<username>defaultUser</username>
+			<access>Unrestricted</access>
+			<imageFileName></imageFileName>
+			<favorites></favorites>
+		</user>
+	</users>
+	
+</settings>

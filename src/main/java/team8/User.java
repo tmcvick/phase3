@@ -22,6 +22,17 @@ public class User {
 	public Set<Album> favorites;
 	
 	// Constructors
+	public User(String username, int PIN, boolean admin, Restriction access, String imageFileName,
+			Set<Album> favorites) {
+		super();
+		this.username = username;
+		this.PIN = PIN;
+		this.admin = admin;
+		this.access = access;
+		this.imageFileName = imageFileName;
+		this.favorites = favorites;
+	}
+	
 	public User(String username, int PIN, boolean admin, Restriction access) {
 		super();
 		this.username = username;
