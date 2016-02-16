@@ -21,11 +21,19 @@ import javax.swing.DefaultListModel;
 import javax.swing.ListSelectionModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import net.miginfocom.swing.MigLayout;
+import javax.swing.JPasswordField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class LoginFrame extends JFrame{
 	
-	private LoginWindow loginWindow;
-	public LoginFrame() {
+		
+		private MyFrame screen;
+		
+		public LoginFrame() {
+			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		BufferedImage img = null;
 		try {
 			img = ImageIO.read(new File("C:\\Users\\Admin\\Pictures\\Saved Pictures\\login.png"));
@@ -38,84 +46,129 @@ public class LoginFrame extends JFrame{
 		JLabel lblWelcomePleaseSelect = new JLabel("Welcome! Please select a user:");
 		lblWelcomePleaseSelect.setHorizontalAlignment(SwingConstants.CENTER);
 		lblWelcomePleaseSelect.setFont(new Font("Times New Roman", Font.BOLD, 18));
+		getContentPane().setLayout(new MigLayout("", "[75px][75][75px][75][75,grow][75][75px][75px][75px]", "[75px][75px][75][75][75][75px]"));
+		getContentPane().add(lblWelcomePleaseSelect, "cell 0 0 9 1,grow");
+		
+		
+		JLabel username = new JLabel("");
+		username.setFont(new Font("Tahoma", Font.BOLD, 16));
+		getContentPane().add(username, "cell 4 3,alignx center,aligny center");
+		
+		JLabel lblEnterPin = new JLabel("Enter Pin:");
+		lblEnterPin.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		getContentPane().add(lblEnterPin, "cell 3 4,alignx trailing,aligny center");
+		
+	    JPasswordField passwordField;
+		passwordField = new JPasswordField();
+		passwordField.setColumns(6);
+		passwordField.setEchoChar('*');
+		getContentPane().add(passwordField, "cell 4 4,alignx center,aligny center");
+		
+		
+		JButton btnSubmit = new JButton("Submit");
+		btnSubmit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(passwordField.getPassword().length == 4)
+					login();
+			}
+		});
+		getContentPane().add(btnSubmit, "cell 5 4,alignx center,aligny center");
+		btnSubmit.setVisible(false);
+		passwordField.setVisible(false);
+		lblEnterPin.setVisible(false);
 		
 		JLabel lblUser = new JLabel("User1");
 		lblUser.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
-				loginWindow.username.setTest(lblUser.getText());
-				loginWindow.setVisible(true);
+				username.setText(lblUser.getText());
+				btnSubmit.setVisible(true);
+				passwordField.setVisible(true);
+				lblEnterPin.setVisible(true);
 			}
 		});
 		lblUser.setIcon(image);
 		lblUser.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblUser.setVerticalTextPosition(SwingConstants.BOTTOM);
+		getContentPane().add(lblUser, "cell 1 1,alignx center,aligny center");
 		
 		JLabel lblUser_1 = new JLabel("User2");
+		lblUser_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				username.setText(lblUser_1.getText());
+				btnSubmit.setVisible(true);
+				passwordField.setVisible(true);
+				lblEnterPin.setVisible(true);
+			}
+		});
 		lblUser_1.setVerticalTextPosition(SwingConstants.BOTTOM);
 		lblUser_1.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblUser_1.setIcon(image);
+		getContentPane().add(lblUser_1, "cell 4 1,alignx center,aligny center");
 		
 		JLabel lblUser_2 = new JLabel("User 3");
+		lblUser_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				username.setText(lblUser_2.getText());
+				btnSubmit.setVisible(true);
+				passwordField.setVisible(true);
+				lblEnterPin.setVisible(true);
+			}
+		});
 		lblUser_2.setVerticalTextPosition(SwingConstants.BOTTOM);
 		lblUser_2.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblUser_2.setIcon(image);
+		getContentPane().add(lblUser_2, "cell 7 1,alignx center,aligny center");
 		
 		JLabel lblUser_3 = new JLabel("User 4");
+		lblUser_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				username.setText(lblUser_3.getText());
+				btnSubmit.setVisible(true);
+				passwordField.setVisible(true);
+				lblEnterPin.setVisible(true);
+			}
+		});
 		lblUser_3.setVerticalTextPosition(SwingConstants.BOTTOM);
 		lblUser_3.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblUser_3.setIcon(image);
+		getContentPane().add(lblUser_3, "cell 2 2,alignx center,aligny center");
 		
 		JLabel lblUser_4 = new JLabel("User 5");
+		lblUser_4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				username.setText(lblUser_4.getText());
+				btnSubmit.setVisible(true);
+				passwordField.setVisible(true);
+				lblEnterPin.setVisible(true);
+			}
+		});
 		lblUser_4.setVerticalTextPosition(SwingConstants.BOTTOM);
 		lblUser_4.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblUser_4.setIcon(image);
-		GroupLayout groupLayout = new GroupLayout(getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(10)
-					.addComponent(lblWelcomePleaseSelect, GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
-					.addGap(6))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(40)
-					.addComponent(lblUser, GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
-					.addGap(97)
-					.addComponent(lblUser_1, GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
-					.addGap(95)
-					.addComponent(lblUser_2, GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-					.addGap(52))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(102)
-					.addComponent(lblUser_3, GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-					.addGap(115)
-					.addComponent(lblUser_4, GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-					.addGap(117))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(11)
-					.addComponent(lblWelcomePleaseSelect, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE, false)
-						.addComponent(lblUser)
-						.addComponent(lblUser_2)
-						.addComponent(lblUser_1))
-					.addGap(49)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE, false)
-						.addComponent(lblUser_4)
-						.addComponent(lblUser_3))
-					.addGap(20))
-		);
-		getContentPane().setLayout(groupLayout);
+		getContentPane().add(lblUser_4, "cell 6 2,alignx center,aligny center");
+		
+		
+		
 		pack();
 	}
 
 	private static final long serialVersionUID = 1L;
+	
 
-	public Boolean login() {
-		return true;
+	public void login() {
+	 this.setVisible(false);
+	screen.setVisible(true);
 		
 	}
+	public void getLogin(MyFrame input)
+	{
+		
+	screen = input;	
+	}
+	
 }

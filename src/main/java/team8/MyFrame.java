@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 
 public class MyFrame extends JFrame {
 	public MyFrame() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
