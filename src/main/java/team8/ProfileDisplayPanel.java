@@ -31,8 +31,8 @@ public class ProfileDisplayPanel extends JPanel{
 	
 	public ProfileDisplayPanel(SettingsPanel p) {
 		parent = p;
-		child = new ProfileInfoPanel(this);
-		newChild = new EditProfilePanel(this);
+		child = p.getProfileInfoPanel();
+		newChild = p.getEditProfilePanel();
 		
 		setLayout(new MigLayout("", "[95][95][95][95][95]", "[75][75][20][75][20][75][20][75]"));
 		BufferedImage img = null;
@@ -157,6 +157,11 @@ public class ProfileDisplayPanel extends JPanel{
 		
 			child.setVisible(true);
 		}
+	}
+
+	public SettingsPanel getSettings() {
+		
+		return parent;
 	}
 
 }
