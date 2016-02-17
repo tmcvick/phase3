@@ -47,7 +47,7 @@ public class FavoritesPanel extends JPanel
 		add(progressBar);
 		
 		/*PLAY/PAUSE BUTTON*/
-		Icon playIcon = new ImageIcon("/Users/claymoeller/workspace/team8/Vector UI Icons/PNG/play.png");
+		Icon playIcon = new ImageIcon("src/play.png");
 		JToggleButton tglbtnPlay = new JToggleButton(playIcon);
 		tglbtnPlay.setBounds(212, 283, 54, 40);
 		add(tglbtnPlay);
@@ -67,13 +67,13 @@ public class FavoritesPanel extends JPanel
 		add(label);
 		
 		/*NEXT TRACK BUTTON*/
-		Icon nextTrackIcon = new ImageIcon("/Users/claymoeller/workspace/team8/Vector UI Icons/PNG/next 1.png");
+		Icon nextTrackIcon = new ImageIcon("src/next 1.png");
 		JButton btnNextTrack = new JButton(nextTrackIcon);
 		btnNextTrack.setBounds(278, 283, 47, 40);
 		add(btnNextTrack);
 		
 		/*PREVIOUS TRACK BUTTON*/
-		Icon prevTrackIcon = new ImageIcon("/Users/claymoeller/workspace/team8/Vector UI Icons/PNG/prev 1.png");
+		Icon prevTrackIcon = new ImageIcon("src/prev 1.png");
 		JButton btnPrevTrack = new JButton(prevTrackIcon);
 		btnPrevTrack.setBounds(153, 283, 47, 40);
 		add(btnPrevTrack);
@@ -84,11 +84,11 @@ public class FavoritesPanel extends JPanel
 	{
 		if (tglbtnPlay.isSelected())
 		{
-			playIcon = new ImageIcon("/Users/claymoeller/workspace/team8/Vector UI Icons/PNG/pause.png");
+			playIcon = new ImageIcon("src/pause.png");
 		}
 		
 		else 
-			playIcon = new ImageIcon("/Users/claymoeller/workspace/team8/Vector UI Icons/PNG/play.png");
+			playIcon = new ImageIcon("src/play.png");
 	}
 	
 }
