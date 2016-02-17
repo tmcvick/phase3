@@ -23,6 +23,15 @@ public class LoginFrame extends JFrame{
 	
 		
 		private MyFrame screen;
+		private JLabel username;
+		private JPasswordField passwordField;
+		private JButton btnSubmit;
+		private JLabel lblEnterPin;
+		private JLabel lblUser;
+		private JLabel lblUser_1;
+		private JLabel lblUser_2;
+		private JLabel lblUser_3;
+		private JLabel lblUser_4;
 		
 		public LoginFrame() {
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,22 +51,22 @@ public class LoginFrame extends JFrame{
 		getContentPane().add(lblWelcomePleaseSelect, "cell 0 0 9 1,grow");
 		
 		
-		JLabel username = new JLabel("");
+		username = new JLabel("");
 		username.setFont(new Font("Tahoma", Font.BOLD, 16));
 		getContentPane().add(username, "cell 4 3,alignx center,aligny center");
 		
-		JLabel lblEnterPin = new JLabel("Enter Pin:");
+		lblEnterPin = new JLabel("Enter Pin:");
 		lblEnterPin.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		getContentPane().add(lblEnterPin, "cell 3 4,alignx trailing,aligny center");
 		
-	    JPasswordField passwordField;
+	    
 		passwordField = new JPasswordField();
 		passwordField.setColumns(6);
 		passwordField.setEchoChar('*');
 		getContentPane().add(passwordField, "cell 4 4,alignx center,aligny center");
 		
 		
-		JButton btnSubmit = new JButton("Submit");
+		btnSubmit = new JButton("Submit");
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(passwordField.getPassword().length == 4)
@@ -69,7 +78,7 @@ public class LoginFrame extends JFrame{
 		passwordField.setVisible(false);
 		lblEnterPin.setVisible(false);
 		
-		JLabel lblUser = new JLabel("User1");
+		lblUser = new JLabel("User1");
 		lblUser.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
@@ -84,7 +93,7 @@ public class LoginFrame extends JFrame{
 		lblUser.setVerticalTextPosition(SwingConstants.BOTTOM);
 		getContentPane().add(lblUser, "cell 1 1,alignx center,aligny center");
 		
-		JLabel lblUser_1 = new JLabel("User2");
+		lblUser_1 = new JLabel("User2");
 		lblUser_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
@@ -99,7 +108,7 @@ public class LoginFrame extends JFrame{
 		lblUser_1.setIcon(image);
 		getContentPane().add(lblUser_1, "cell 4 1,alignx center,aligny center");
 		
-		JLabel lblUser_2 = new JLabel("User 3");
+		lblUser_2 = new JLabel("User 3");
 		lblUser_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -114,7 +123,7 @@ public class LoginFrame extends JFrame{
 		lblUser_2.setIcon(image);
 		getContentPane().add(lblUser_2, "cell 7 1,alignx center,aligny center");
 		
-		JLabel lblUser_3 = new JLabel("User 4");
+		lblUser_3 = new JLabel("User 4");
 		lblUser_3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -129,7 +138,7 @@ public class LoginFrame extends JFrame{
 		lblUser_3.setIcon(image);
 		getContentPane().add(lblUser_3, "cell 2 2,alignx center,aligny center");
 		
-		JLabel lblUser_4 = new JLabel("User 5");
+		lblUser_4 = new JLabel("User 5");
 		lblUser_4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
