@@ -22,7 +22,7 @@ public class DisplayRestrictionsPanel extends JPanel{
 
 	public DisplayRestrictionsPanel(SettingsPanel p) {
 		parent = p;
-		child = new EditRestrictionsPanel(this);
+		child = p.getEditRestrictionsPanel();
 		
 		setLayout(new MigLayout("", "[75][150,grow][150,grow][75]", "[25][50][100,grow][50][100,grow]"));
 		

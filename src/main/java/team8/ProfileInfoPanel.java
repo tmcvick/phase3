@@ -37,11 +37,11 @@ public class ProfileInfoPanel extends JPanel{
 	
 	public ProfileInfoPanel(ProfileDisplayPanel p) {
 		parent = p;
-		child = new EditProfilePanel(this);
+		child = p.getSettings().getEditProfilePanel();
 		setLayout(new MigLayout("", "[125][125,grow][][125,grow][125,grow]", "[75][75,grow][75][75][150,grow]"));
 		BufferedImage img = null;
 		try {
-			img = ImageIO.read(new File("C:\\Users\\Admin\\Pictures\\Saved Pictures\\login.png"));
+			img = ImageIO.read(new File("src/login.png"));
 		} catch (IOException e) {
 				e.printStackTrace();
 		}

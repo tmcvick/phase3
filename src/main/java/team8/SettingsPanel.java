@@ -11,6 +11,11 @@ public class SettingsPanel extends JPanel {
 	private ChangeServerPanel changeServerPanel;
 	private DisplayRestrictionsPanel restrictionsPanel;
 	private ProfileDisplayPanel profilePanel;
+	private DeletePopup deletePopup;
+	private EditProfilePanel editProfilePanel;
+	private EditRestrictionsPanel editRestrictionsPanel;
+	private ProfileInfoPanel profileInfoPanel;
+	private ServerPopup serverPopup;
 	
 	public SettingsPanel() {
 		changeServerPanel = new ChangeServerPanel(this);
@@ -67,6 +72,46 @@ public class SettingsPanel extends JPanel {
 		profilePanel.setVisible(true);
 	else if(i == 3)
 		restrictionsPanel.setVisible(true);
+	}
+
+	public DeletePopup getDeletePopup() {
+		return deletePopup;
+	}
+
+	public void setDeletePopup(DeletePopup deletePopup) {
+		this.deletePopup = deletePopup;
+	}
+
+	public EditProfilePanel getEditProfilePanel() {
+		return editProfilePanel;
+	}
+
+	public void setEditProfilePanel(EditProfilePanel editProfilePanel) {
+		this.editProfilePanel = editProfilePanel;
+	}
+
+	public EditRestrictionsPanel getEditRestrictionsPanel() {
+		return editRestrictionsPanel;
+	}
+
+	public void setEditRestrictionsPanel(EditRestrictionsPanel editRestrictionsPanel) {
+		this.editRestrictionsPanel = editRestrictionsPanel;
+	}
+
+	public ProfileInfoPanel getProfileInfoPanel() {
+		return profileInfoPanel;
+	}
+
+	public void setProfileInfoPanel(ProfileInfoPanel profileInfoPanel) {
+		this.profileInfoPanel = profileInfoPanel;
+	}
+
+	public ServerPopup getServerPopup() {
+		return serverPopup;
+	}
+
+	public void setServerPopup(ServerPopup serverPopup) {
+		this.serverPopup = serverPopup;
 	}
 }
 

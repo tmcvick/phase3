@@ -37,7 +37,7 @@ public class LoginFrame extends JFrame{
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		BufferedImage img = null;
 		try {
-			img = ImageIO.read(new File("C:\\Users\\Admin\\Pictures\\Saved Pictures\\login.png"));
+			img = ImageIO.read(new File("src/login.png"));
 		} catch (IOException e) {
 				e.printStackTrace();
 		}
