@@ -6,7 +6,6 @@ import java.awt.BorderLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JPanel;
-import javax.swing.JLabel;
 
 public class MyFrame extends JFrame {
 	public MyFrame() {
@@ -27,8 +26,16 @@ public class MyFrame extends JFrame {
 					.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)
 					.addContainerGap())
 		);
+		
+		JPanel FavoritesTab = new FavoritesPanel();
+		tabbedPane.addTab("Favorites", null, FavoritesTab, "Locally Favorited Music\n");
+		
+		JPanel LibraryTab = new LibraryPanel();
+		tabbedPane.addTab("Library", null, LibraryTab, null);
+		
+		JPanel SettingsTab = new JPanel();
+		tabbedPane.addTab("Settings", null, SettingsTab, null);
 		getContentPane().setLayout(groupLayout);
-		pack();
 	}
 	private static final long serialVersionUID = 1L;
 }
