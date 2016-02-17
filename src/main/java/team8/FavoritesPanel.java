@@ -15,6 +15,9 @@ import java.awt.Color;
 import javax.swing.JProgressBar;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeModel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
@@ -33,7 +36,9 @@ public class FavoritesPanel extends JPanel
 		favScrollBar.setBounds(472, 6, 15, 233);
 		add(favScrollBar);
 		
-		JTree favAlbumTree = new JTree();
+		MyJTreeData favAlbumTree = new MyJTreeData();
+		
+		
 		favAlbumTree.setBounds(6, 6, 481, 233);
 		add(favAlbumTree);
 		
@@ -74,6 +79,7 @@ public class FavoritesPanel extends JPanel
 		add(btnPrevTrack);
 	}
 	
+	/*Switches Play button to Pause when Pressed*/
 	public void SwitchButton()
 	{
 		if (tglbtnPlay.isSelected())
@@ -84,4 +90,5 @@ public class FavoritesPanel extends JPanel
 		else 
 			playIcon = new ImageIcon("/Users/claymoeller/workspace/team8/Vector UI Icons/PNG/play.png");
 	}
+	
 }
