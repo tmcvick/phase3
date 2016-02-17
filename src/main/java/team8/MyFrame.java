@@ -33,9 +33,11 @@ public class MyFrame extends JFrame {
 		JPanel LibraryTab = new LibraryPanel();
 		tabbedPane.addTab("Library", null, LibraryTab, null);
 		
-		JPanel SettingsTab = new JPanel();
+		JPanel SettingsTab = new SettingsPanel();
 		tabbedPane.addTab("Settings", null, SettingsTab, null);
-		getContentPane().setLayout(groupLayout);
+		
+		pack();
+		
 	}
 	private static final long serialVersionUID = 1L;
 }
