@@ -21,6 +21,8 @@ import javax.swing.AbstractListModel;
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ProfileInfoPanel extends JPanel{
 	/**
@@ -49,6 +51,12 @@ public class ProfileInfoPanel extends JPanel{
 		
 		ImageIcon image = new ImageIcon(resized);
 		JButton btnBack = new JButton("Back");
+		btnBack.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				panel_switch(0);
+			}
+		});
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panel_switch(0);
@@ -64,6 +72,14 @@ public class ProfileInfoPanel extends JPanel{
 		add(lblUser, "cell 2 0,alignx center,aligny bottom");
 		
 		JButton btnEdit = new JButton("Edit");
+		btnEdit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				EditProfilePanel child = parent.getHome().getEditProfilePanel();
+				child.setUsername(lblUser.getText(), txtAdmin.getText());
+				panel_switch(1);
+			}
+		});
 		btnEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				EditProfilePanel child = parent.getHome().getEditProfilePanel();

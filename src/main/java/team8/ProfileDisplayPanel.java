@@ -44,6 +44,12 @@ public class ProfileDisplayPanel extends JPanel{
 		
 		ImageIcon image = new ImageIcon(resized);
 		JButton btnBack = new JButton("Back");
+		btnBack.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				switch_panel(0);
+			}
+		});
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				switch_panel(0);
@@ -134,6 +140,14 @@ public class ProfileDisplayPanel extends JPanel{
 		add(lblUser_5, "cell 3 5,alignx center,aligny center");
 		
 		JButton btnNew = new JButton("New");
+		btnNew.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				EditProfilePanel newChild = parent.getHome().getEditProfilePanel();;
+				newChild.clearFields();
+				switch_panel(1);
+			}
+		});
 		btnNew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				EditProfilePanel newChild = parent.getHome().getEditProfilePanel();;

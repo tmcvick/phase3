@@ -2,8 +2,6 @@ package team8;
 
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JPanel;
 import java.awt.CardLayout;
 

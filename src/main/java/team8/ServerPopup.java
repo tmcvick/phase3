@@ -2,7 +2,6 @@ package team8;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JButton;

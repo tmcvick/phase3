@@ -8,6 +8,8 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class EditRestrictionsPanel extends JPanel{
 	private MyFrame parent;
@@ -16,6 +18,12 @@ public class EditRestrictionsPanel extends JPanel{
 		parent = p.getParent();
 		
 		JButton btnSubmit = new JButton("Submit");
+		btnSubmit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				panel_switch(0);
+			}
+		});
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panel_switch(0);
@@ -25,6 +33,12 @@ public class EditRestrictionsPanel extends JPanel{
 		add(btnSubmit);
 		
 		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				panel_switch(0);
+			}
+		});
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panel_switch(0);

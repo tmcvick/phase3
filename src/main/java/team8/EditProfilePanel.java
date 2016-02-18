@@ -10,12 +10,15 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class EditProfilePanel extends JPanel{
 	private MyFrame parent;
+	@SuppressWarnings("unused")
 	private JPanel step;
 	private DeletePopup child;
-	
+	private boolean isNew = false;
 	
 	public EditProfilePanel(JPanel p) {
 		if(p instanceof ProfileInfoPanel){
@@ -31,6 +34,12 @@ public class EditProfilePanel extends JPanel{
 		setLayout(new MigLayout("", "[50][100][150,grow][50]", "[50][50][50][50][50][50][50][150,grow]"));
 		
 		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				panel_switch(0);
+			}
+		});
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panel_switch(0);
@@ -39,6 +48,12 @@ public class EditProfilePanel extends JPanel{
 		add(btnCancel, "cell 0 0,alignx left,aligny top");
 		
 		JButton btnDelete = new JButton("Delete");
+		btnDelete.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				child.setVisible(true);
+			}
+		});
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				child.setVisible(true);
@@ -114,6 +129,12 @@ public class EditProfilePanel extends JPanel{
 		add(txtrAlbumAlbum, "cell 2 7,grow");
 		
 		JButton btnNewButton = new JButton("Submit");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				panel_switch(0);
+			}
+		});
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panel_switch(0);
@@ -127,11 +148,11 @@ public class EditProfilePanel extends JPanel{
 	}
 
 	private void panel_switch(int i) {
-		if(step instanceof ProfileInfoPanel)
+		if(isNew == false)
 			parent.getCardlayout().show(parent.getCards(), "indvprofile");
 		else
 			parent.getCardlayout().show(parent.getCards(), "profile");
-		
+		isNew = false;
 	}
 
 	/**
@@ -160,7 +181,7 @@ public class EditProfilePanel extends JPanel{
 		textField_2.setText("");
 		txtAdmin.setText("");
 		txtrAlbumAlbum.setText("");
-		
+		isNew = true;
 	}
 
 }

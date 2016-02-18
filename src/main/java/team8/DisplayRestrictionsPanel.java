@@ -10,6 +10,8 @@ import javax.swing.JList;
 import javax.swing.AbstractListModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class DisplayRestrictionsPanel extends JPanel{
 	/**
@@ -27,11 +29,13 @@ public class DisplayRestrictionsPanel extends JPanel{
 		setLayout(new MigLayout("", "[75][150,grow][150,grow][75]", "[25][50][100,grow][50][100,grow]"));
 		
 		JButton btnBack = new JButton("Back");
-		btnBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnBack.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent arg0) {
 				panel_switch(0);
 			}
 		});
+		
 		add(btnBack, "cell 0 0,alignx left,aligny top");
 		
 		JLabel lblRestriction = new JLabel("Restrictions:");
@@ -39,6 +43,12 @@ public class DisplayRestrictionsPanel extends JPanel{
 		add(lblRestriction, "cell 1 0,alignx right,aligny bottom");
 		
 		JButton btnEdit = new JButton("Edit");
+		btnEdit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				panel_switch(1);
+			}
+		});
 		btnEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panel_switch(1);
@@ -109,7 +119,10 @@ public class DisplayRestrictionsPanel extends JPanel{
 	private void panel_switch(int i) {
 		
 		if(i == 0)
+		{
 			parent.getCardlayout().show(parent.getCards(), "home");
+		System.out.println("here");
+		}
 		if(i ==1)
 			parent.getCardlayout().show(parent.getCards(),  "editrestriction");
 	}

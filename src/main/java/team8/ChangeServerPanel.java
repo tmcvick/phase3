@@ -8,6 +8,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ChangeServerPanel extends JPanel {
 	/**
@@ -22,6 +24,12 @@ public class ChangeServerPanel extends JPanel {
 		setLayout(new MigLayout("", "[100][400,grow][100]", "[50][50][50][50][50][50][50]"));
 		
 		JButton btnBack = new JButton("Back");
+		btnBack.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				switch_back();
+			}
+		});
 		add(btnBack, "cell 0 0,alignx left,aligny top");
 		
 		JLabel lblCurrentServer = new JLabel("Current Server:");
@@ -43,6 +51,20 @@ public class ChangeServerPanel extends JPanel {
 		textField.setColumns(10);
 		
 		JButton btnSubmit = new JButton("Submit");
+		btnSubmit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				ServerPopup pop = new ServerPopup();
+				pop.setVisible(true);
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e1) {
+					
+					e1.printStackTrace();
+				}
+				switch_back();
+			}
+		});
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ServerPopup pop = new ServerPopup();
