@@ -2,17 +2,19 @@ package team8;
 
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 public class MyJTreeData extends JTree
 {
-
-	private static final long serialVersionUID = 1L;
-
 	public MyJTreeData()
 	{
-        DefaultMutableTreeNode root = new DefaultMutableTreeNode("JTree");
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("Albums");
         DefaultMutableTreeNode parent;
-
+        
+        DefaultTreeModel model= new DefaultTreeModel(root);
+        model.setRoot(null);
+        JTree tree = new JTree(root);
+        
         parent = new DefaultMutableTreeNode("Led Zeppelin IV");
         root.add(parent);
         parent.add(new DefaultMutableTreeNode("Misty Mountain Hop"));
@@ -33,5 +35,7 @@ public class MyJTreeData extends JTree
         parent.add(new DefaultMutableTreeNode("Money"));
         parent.add(new DefaultMutableTreeNode("Time"));
         parent.add(new DefaultMutableTreeNode("Brain Damage"));
+        
+        tree.setModel(model);
 	}
 }

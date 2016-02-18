@@ -1,45 +1,45 @@
-/**
- * 
- */
 package team8;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.After;
-import org.junit.Before;
+import java.net.URL;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-/**
- * @author dpyle
- *
- */
 public class SettingsTest {
-
-	/**
-	 * @throws java.lang.Exception
-	 */
+	protected static Settings settings;
+	protected static URL testURL;
+	protected static User testUser;
+	protected static Album testRestrictedAlbum;
+	protected static Album testUnrestrictedAlbum;
+	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@After
-	public void tearDown() throws Exception {
+		settings = Settings.getInstance();
+		testURL = new URL("http://127.0.0.1:5001/upnp/control/content_directory");
+		testUser = new User("defaultUser", 7777, true, Restriction.Unrestricted);
+		testUnrestrictedAlbum = new Album(Restriction.Unrestricted, "Test", "Dylan Pyle", 7);
+		testRestrictedAlbum = new Album(Restriction.Restricted, "Restricted Test", "Dylan Pyle", 13);
 	}
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testURL() {
+		assertEquals(testURL, Settings.serverURL);
 	}
 
+	@Test
+	public void testUser() {
+		User user = settings.getCurrentUser();
+		assertTrue(testUser.equals(user));
+		assertTrue(Settings.users.contains(testUser));
+	}
+	
+	@Test
+	public void testAlbums() {
+		assertTrue(settings.getAlbums(Restriction.Restricted).contains(testRestrictedAlbum));
+		assertTrue(settings.getAlbums(Restriction.Unrestricted).contains(testUnrestrictedAlbum));
+	}
+	
 }

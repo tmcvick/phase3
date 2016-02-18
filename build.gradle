@@ -24,6 +24,7 @@ dependencies {
     compile 'org.slf4j:slf4j-api:1.7.12'
     compile fileTree(dir: 'lib', include: ['*.jar'])
  	compile 'com.squareup.okhttp3:okhttp:3.0.1'
+ 	compile 'com.miglayout:miglayout:3.7.2:swing@jar'
     compile 'javax.media:jmf:2.1.1e'
     testCompile 'junit:junit:4.12'
 }
