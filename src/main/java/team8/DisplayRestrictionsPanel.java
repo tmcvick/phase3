@@ -69,6 +69,7 @@ public class DisplayRestrictionsPanel extends JPanel{
 		add(scrollPane, "cell 1 2,grow");
 		
 		JList<String> list = new JList<String>();
+		list.setEnabled(false);
 		list.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		list.setModel(new AbstractListModel<String>() {
 			/**
@@ -89,6 +90,7 @@ public class DisplayRestrictionsPanel extends JPanel{
 		add(scrollPane_1, "cell 2 2,grow");
 		
 		JList<?> list_1 = new JList<Object>();
+		list_1.setEnabled(false);
 		list_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		scrollPane_1.setViewportView(list_1);
 		
@@ -100,6 +102,7 @@ public class DisplayRestrictionsPanel extends JPanel{
 		add(scrollPane_2, "cell 1 4,grow");
 		
 		JList<String> list_2 = new JList<String>();
+		list_2.setEnabled(false);
 		list_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		list_2.setModel(new AbstractListModel<String>() {
 			/**
