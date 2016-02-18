@@ -6,6 +6,11 @@ import javax.swing.tree.DefaultTreeModel;
 
 public class MyJTreeData extends JTree
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public MyJTreeData()
 	{
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("Albums");
