@@ -13,11 +13,11 @@ public class DeletePopup extends JFrame{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-private EditProfilePanel parent;
-private ProfileDisplayPanel grand;
-	public DeletePopup(EditProfilePanel p, ProfileDisplayPanel g) {
-		parent = p;
-		grand = g;
+private MyFrame parent;
+
+	public DeletePopup(EditProfilePanel p) {
+		parent = p.getParent();
+		
 		
 		getContentPane().setLayout(new MigLayout("", "[][][][][][][][][]", "[][][]"));
 		
@@ -42,13 +42,14 @@ private ProfileDisplayPanel grand;
 		});
 		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		getContentPane().add(btnCancel, "cell 6 2");
+		pack();
 	}
 	protected void panel_switch(int i) {
-		this.setVisible(false);
+		
 		if(i == -1)
-			grand.setVisible(true);
+			parent.getCardlayout().show(parent.getCards(), "profile");
 		if(i == 0)
-			parent.setVisible(true);
+			parent.getCardlayout().show(parent.getCards(), "editprofile");
 	}
 
 }

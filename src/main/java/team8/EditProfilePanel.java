@@ -12,17 +12,22 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class EditProfilePanel extends JPanel{
-	private JPanel parent;
+	private MyFrame parent;
+	private JPanel step;
 	private DeletePopup child;
 	
 	
 	public EditProfilePanel(JPanel p) {
-		parent = p;
-		if(parent instanceof ProfileInfoPanel)
-			child = new DeletePopup(this, ((ProfileInfoPanel)parent).getFather());	
-		else
-			child = new DeletePopup(this, (ProfileDisplayPanel)parent);
-		
+		if(p instanceof ProfileInfoPanel){
+			parent = ((ProfileInfoPanel)p).getParent();
+			step = p;
+			child = new DeletePopup(this);	
+		}
+		else{
+			parent = (((ProfileDisplayPanel)p).getParent());
+			step = p;
+			child = new DeletePopup(this);
+		}
 		setLayout(new MigLayout("", "[50][100][150,grow][50]", "[50][50][50][50][50][50][50][150,grow]"));
 		
 		JButton btnCancel = new JButton("Cancel");
@@ -117,9 +122,15 @@ public class EditProfilePanel extends JPanel{
 		add(btnNewButton, "cell 3 7,aligny top");
 	}
 
+	public MyFrame getParent() {
+		return parent;
+	}
+
 	private void panel_switch(int i) {
-		setVisible(false);
-		parent.setVisible(true);
+		if(step instanceof ProfileInfoPanel)
+			parent.getCardlayout().show(parent.getCards(), "indvprofile");
+		else
+			parent.getCardlayout().show(parent.getCards(), "profile");
 		
 	}
 

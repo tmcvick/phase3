@@ -31,13 +31,13 @@ public class ProfileInfoPanel extends JPanel{
 	private JTextField txtFilepng;
 	private JTextField textField_1;
 	private JTextField txtAdmin;
-	private ProfileDisplayPanel parent;
-	private EditProfilePanel child;
+	private MyFrame parent;
+	
 	private JLabel lblUser;
 	
 	public ProfileInfoPanel(ProfileDisplayPanel p) {
-		parent = p;
-		child = p.getSettings().getEditProfilePanel();
+		parent = p.getParent();
+		
 		setLayout(new MigLayout("", "[125][125,grow][][125,grow][125,grow]", "[75][75,grow][75][75][150,grow]"));
 		BufferedImage img = null;
 		try {
@@ -66,6 +66,7 @@ public class ProfileInfoPanel extends JPanel{
 		JButton btnEdit = new JButton("Edit");
 		btnEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				EditProfilePanel child = parent.getHome().getEditProfilePanel();
 				child.setUsername(lblUser.getText(), txtAdmin.getText());
 				panel_switch(1);
 			}
@@ -140,11 +141,11 @@ public class ProfileInfoPanel extends JPanel{
 	}
 
 	private void panel_switch(int i) {
-		setVisible(false);
+		
 		if(i == 0)
-			parent.setVisible(true);
+			parent.getCardlayout().show(parent.getCards(), "profile");
 		if(i == 1)
-			child.setVisible(true);
+			parent.getCardlayout().show(parent.getCards(), "editprofile");
 		
 	}
 
@@ -156,8 +157,8 @@ public class ProfileInfoPanel extends JPanel{
 		
 	}
 
-	public ProfileDisplayPanel getFather() {
-		
+	
+	public MyFrame getParent() {
 		return parent;
 	}
 

@@ -3,6 +3,8 @@ package team8;
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
+
+import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -15,12 +17,34 @@ public class SettingsPanel extends JPanel {
 	private EditProfilePanel editProfilePanel;
 	private EditRestrictionsPanel editRestrictionsPanel;
 	private ProfileInfoPanel profileInfoPanel;
-	private ServerPopup serverPopup;
 	
-	public SettingsPanel() {
-		changeServerPanel = new ChangeServerPanel(this);
-		restrictionsPanel = new DisplayRestrictionsPanel(this);
-		profilePanel = new ProfileDisplayPanel(this);
+	public ChangeServerPanel getChangeServerPanel() {
+		return changeServerPanel;
+	}
+
+	public DisplayRestrictionsPanel getRestrictionsPanel() {
+		return restrictionsPanel;
+	}
+
+	public ProfileDisplayPanel getProfilePanel() {
+		return profilePanel;
+	}
+	private ServerPopup serverPopup;
+	private MyFrame parent;
+	private CardLayout cards;
+	
+	public SettingsPanel(MyFrame p) {
+		parent = p;
+		cards = parent.getCardlayout();
+		
+		changeServerPanel = new ChangeServerPanel(parent);
+		restrictionsPanel = new DisplayRestrictionsPanel(parent);
+		profilePanel = new ProfileDisplayPanel(parent);
+		profileInfoPanel = new ProfileInfoPanel(profilePanel);
+		editProfilePanel = new EditProfilePanel(profileInfoPanel);
+		editRestrictionsPanel = new EditRestrictionsPanel(restrictionsPanel);
+		
+		
 		setLayout(new MigLayout("", "[200][200][200]", "[50][50][50][50][50][50]"));
 		
 		JLabel lblWhatWouldYou = new JLabel("What would you like to do?");
@@ -65,13 +89,18 @@ public class SettingsPanel extends JPanel {
 
 	private void panel_switch(int i)
 	{
+		
 		this.setVisible(false);
-	if(i == 1)
-		changeServerPanel.setVisible(true);
-	else if(i == 2)
-		profilePanel.setVisible(true);
-	else if(i == 3)
-		restrictionsPanel.setVisible(true);
+		if(i == 1)
+		{
+			cards.show(parent.getCards(), "server");
+			
+		}
+		else if(i == 2)
+			cards.show(parent.getCards(), "profile");
+		else if(i == 3)
+			cards.show(parent.getCards(), "restrict");
+		
 	}
 
 	public DeletePopup getDeletePopup() {

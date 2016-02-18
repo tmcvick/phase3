@@ -16,13 +16,13 @@ public class DisplayRestrictionsPanel extends JPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private SettingsPanel parent;
+	private MyFrame parent;
 	
-	private EditRestrictionsPanel child;
 
-	public DisplayRestrictionsPanel(SettingsPanel p) {
-		parent = p;
-		child = p.getEditRestrictionsPanel();
+
+	public DisplayRestrictionsPanel(MyFrame parent2) {
+		parent = parent2;
+		
 		
 		setLayout(new MigLayout("", "[75][150,grow][150,grow][75]", "[25][50][100,grow][50][100,grow]"));
 		
@@ -107,12 +107,14 @@ public class DisplayRestrictionsPanel extends JPanel{
 		scrollPane_2.setViewportView(list_2);
 	}
 	private void panel_switch(int i) {
-		setVisible(false);
+		
 		if(i == 0)
-			parent.setVisible(true);
+			parent.getCardlayout().show(parent.getCards(), "home");
 		if(i ==1)
-			child.setVisible(true);
+			parent.getCardlayout().show(parent.getCards(),  "editrestriction");
 	}
-
+	public MyFrame getParent(){
+		return parent;
+	}
 	
 }

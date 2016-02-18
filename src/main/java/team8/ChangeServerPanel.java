@@ -16,9 +16,9 @@ public class ChangeServerPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTextField txtWwwfakeservercom;
 	private JTextField textField;
-	private SettingsPanel parent;
-	public ChangeServerPanel(SettingsPanel s) {
-		parent = s;
+	private MyFrame parent;
+	public ChangeServerPanel(MyFrame parent2) {
+		parent = parent2;
 		setLayout(new MigLayout("", "[100][400,grow][100]", "[50][50][50][50][50][50][50]"));
 		
 		JButton btnBack = new JButton("Back");
@@ -61,8 +61,7 @@ public class ChangeServerPanel extends JPanel {
 	
 	private void switch_back()
 	{
-		this.setVisible(false);
-		parent.setVisible(true);
+		parent.getCardlayout().show(parent.getCards(), "home");
 	}
 
 }

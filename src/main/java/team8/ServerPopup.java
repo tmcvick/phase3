@@ -8,6 +8,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import net.miginfocom.swing.MigLayout;
 
 public class ServerPopup extends JFrame{
 	/**
@@ -17,17 +18,20 @@ public class ServerPopup extends JFrame{
 	private JLabel lblServerFound;
 	private JButton btnClose;
 	public ServerPopup() {
+		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setLayout(new MigLayout("", "[100px][150][100]", "[17px][22px][23px]"));
 		
 		JLabel lblVerifyingServer = new JLabel("Verifying Server..........");
 		lblVerifyingServer.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblVerifyingServer.setHorizontalAlignment(SwingConstants.CENTER);
-		getContentPane().add(lblVerifyingServer, BorderLayout.NORTH);
+		getContentPane().add(lblVerifyingServer, "cell 1 0,alignx left,aligny top");
 		
 		lblServerFound = new JLabel("Server Found!");
 		lblServerFound.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblServerFound.setHorizontalAlignment(SwingConstants.CENTER);
-		getContentPane().add(lblServerFound, BorderLayout.CENTER);
+		getContentPane().add(lblServerFound, "cell 1 1,growx,aligny top");
+		lblServerFound.setVisible(false);
 		
 		btnClose = new JButton("Close");
 		btnClose.addActionListener(new ActionListener() {
@@ -36,9 +40,9 @@ public class ServerPopup extends JFrame{
 				dispose();
 			}
 		});
-		getContentPane().add(btnClose, BorderLayout.SOUTH);
+		getContentPane().add(btnClose, "cell 1 2,growx,aligny top");
 		btnClose.setVisible(false);
-		lblServerFound.setVisible(false);
+		pack();
 	}
 	public void setVisible(boolean bool)
 	{

@@ -10,10 +10,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class EditRestrictionsPanel extends JPanel{
-	private DisplayRestrictionsPanel parent;
+	private MyFrame parent;
 	public EditRestrictionsPanel(DisplayRestrictionsPanel p) {
 		setLayout(null);
-		parent = p;
+		parent = p.getParent();
 		
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.addActionListener(new ActionListener() {
@@ -101,9 +101,9 @@ public class EditRestrictionsPanel extends JPanel{
 	}
 
 	private void panel_switch(int i) {
-		this.setVisible(false);
+	
 		if(i == 0)
-			parent.setVisible(true);
+			parent.getCardlayout().show(parent.getCards(), "restrict");
 		
 	}
 

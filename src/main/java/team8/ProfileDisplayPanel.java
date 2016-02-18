@@ -25,14 +25,13 @@ public class ProfileDisplayPanel extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	private String username = "";
-	private SettingsPanel parent;
-	private ProfileInfoPanel child;
-	private EditProfilePanel newChild;
+	private MyFrame parent;
 	
-	public ProfileDisplayPanel(SettingsPanel p) {
-		parent = p;
-		child = p.getProfileInfoPanel();
-		newChild = p.getEditProfilePanel();
+		
+	public ProfileDisplayPanel(MyFrame parent2) {
+		parent = parent2;
+		
+		
 		
 		setLayout(new MigLayout("", "[95][95][95][95][95]", "[75][75][20][75][20][75][20][75]"));
 		BufferedImage img = null;
@@ -137,6 +136,7 @@ public class ProfileDisplayPanel extends JPanel{
 		JButton btnNew = new JButton("New");
 		btnNew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				EditProfilePanel newChild = parent.getHome().getEditProfilePanel();;
 				newChild.clearFields();
 				switch_panel(1);
 			}
@@ -146,22 +146,27 @@ public class ProfileDisplayPanel extends JPanel{
 	
 	private void switch_panel(int i)
 	{
-		this.setVisible(false);
+		
 		if(i == 0)
-			parent.setVisible(true);
+			parent.getCardlayout().show(parent.getCards(), "home");
 		if(i == 1)
-			newChild.setVisible(true);
+			parent.getCardlayout().show(parent.getCards(), "editprofile");
 		if(i == 2)
 		{
+			ProfileInfoPanel child = parent.getHome().getProfileInfoPanel();
 			child.setUsername(username);
 		
-			child.setVisible(true);
+			parent.getCardlayout().show(parent.getCards(), "indvprofile");
 		}
+	}
+
+	public MyFrame getParent() {
+		return parent;
 	}
 
 	public SettingsPanel getSettings() {
 		
-		return parent;
+		return parent.getHome();
 	}
 
 }
