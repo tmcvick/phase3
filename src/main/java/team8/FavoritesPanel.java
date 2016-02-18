@@ -2,31 +2,19 @@ package team8;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JPanel;
-import javax.swing.JSplitPane;
-import net.miginfocom.swing.MigLayout;
-import javax.swing.JSpinner;
-import java.awt.GridLayout;
-import javax.swing.JTree;
-import java.awt.FlowLayout;
-import javax.swing.JScrollBar;
-import javax.swing.JSeparator;
-import java.awt.Color;
-import javax.swing.JProgressBar;
-import javax.swing.JToggleButton;
-import javax.swing.SwingConstants;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeModel;
-import javax.swing.JLabel;
 import javax.swing.JButton;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.JScrollBar;
+import javax.swing.JToggleButton;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class FavoritesPanel extends JPanel 
 {
+	private static final long serialVersionUID = 1L;
 	private JToggleButton tglbtnPlay;
-	private Icon playIcon;
 	
 	public FavoritesPanel() 
 	{
@@ -35,10 +23,8 @@ public class FavoritesPanel extends JPanel
 		JScrollBar favScrollBar = new JScrollBar();
 		favScrollBar.setBounds(472, 6, 15, 233);
 		add(favScrollBar);
-		
+				
 		MyJTreeData favAlbumTree = new MyJTreeData();
-		
-		
 		favAlbumTree.setBounds(6, 6, 481, 233);
 		add(favAlbumTree);
 		
@@ -47,19 +33,24 @@ public class FavoritesPanel extends JPanel
 		add(progressBar);
 		
 		/*PLAY/PAUSE BUTTON*/
-		Icon playIcon = new ImageIcon("src/play.png");
-		JToggleButton tglbtnPlay = new JToggleButton(playIcon);
+		final ImageIcon playIcon = new ImageIcon("src/play.png");
+		final ImageIcon pauseIcon = new ImageIcon("src/pause.png");
+		tglbtnPlay = new JToggleButton(playIcon);
 		tglbtnPlay.setBounds(212, 283, 54, 40);
 		add(tglbtnPlay);
-		tglbtnPlay.addMouseListener(new MouseAdapter() 
-		{
-			@Override
-			public void mousePressed(MouseEvent e) 
-			{
-				SwitchButton();
-			}
-		});
 		
+		tglbtnPlay.addChangeListener(new ChangeListener()
+		{
+	        @Override
+	        public void stateChanged(ChangeEvent event) 
+	        {
+	        	if (tglbtnPlay.isSelected())
+	        		tglbtnPlay.setIcon(playIcon);
+	        	else
+	        		tglbtnPlay.setIcon(pauseIcon);
+	        	
+	        }
+		});
 		
 		/*TRACK NAME LABEL*/
 		JLabel label = new JLabel("<Track Name>");
@@ -77,18 +68,6 @@ public class FavoritesPanel extends JPanel
 		JButton btnPrevTrack = new JButton(prevTrackIcon);
 		btnPrevTrack.setBounds(153, 283, 47, 40);
 		add(btnPrevTrack);
-	}
-	
-	/*Switches Play button to Pause when Pressed*/
-	public void SwitchButton()
-	{
-		if (tglbtnPlay.isSelected())
-		{
-			playIcon = new ImageIcon("src/pause.png");
-		}
-		
-		else 
-			playIcon = new ImageIcon("src/play.png");
 	}
 	
 }
