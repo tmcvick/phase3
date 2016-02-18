@@ -69,10 +69,10 @@ set CMD_LINE_ARGS=%$
 :execute
 @rem Setup the command line
 
-set CLASSPATH=%APP_HOME%\lib\team8.jar;%APP_HOME%\lib\slf4j-api-1.7.12.jar;%APP_HOME%\lib\okhttp-3.0.1.jar;%APP_HOME%\lib\jmf-2.1.1e.jar;%APP_HOME%\lib\okio-1.6.0.jar
+set CLASSPATH=%APP_HOME%\lib\team8.jar;%APP_HOME%\lib\slf4j-api-1.7.12.jar;%APP_HOME%\lib\okhttp-3.0.1.jar;%APP_HOME%\lib\miglayout-3.7.2-swing.jar;%APP_HOME%\lib\jmf-2.1.1e.jar;%APP_HOME%\lib\okio-1.6.0.jar
 
 @rem Execute team8
-"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %TEAM8_OPTS%  -classpath "%CLASSPATH%" Main %CMD_LINE_ARGS%
+"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %TEAM8_OPTS%  -classpath "%CLASSPATH%" team8.Main %CMD_LINE_ARGS%
 
 :end
 @rem End local scope for the variables with windows NT shell

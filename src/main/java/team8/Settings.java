@@ -23,8 +23,36 @@ public class Settings {
 		if (instance == null) instance = new Settings();
 		return instance;
 	}
-	public Settings() {
+	private Settings() {
 		// Load class from Settings.xml
+		load();
+	}
+
+	// Private Fields
+	private Map<Restriction, Set<Album>> albums;
+	public Set<Album> getAlbums(Restriction access) { return albums.get(access); }
+	public void addAlbum(Album newAlbum) { 
+		Set<Album> currentAlbums = albums.get(newAlbum.getAccess());
+		if (!currentAlbums.contains(newAlbum)) {
+			currentAlbums.add(newAlbum); 
+		}
+	}
+	private User currentUser;
+	public User getCurrentUser() { return currentUser; }
+	public void setCurrentUser(String username, int PIN) {
+		for (User user: users) {
+			if (user.getUsername().equalsIgnoreCase(username) && user.getPIN() == PIN) { 
+				currentUser = user; 
+			}
+		}
+	}
+	
+	// Public Fields
+	public static URL serverURL;
+	public static Set<User> users;
+	
+	// Methods
+	public void load() {
 		try {
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();
@@ -91,6 +119,8 @@ public class Settings {
 			Element albumElement = (Element) albumNode;
 			favorites.add(parseAlbum(albumElement));
 		}
+		if (favorites.isEmpty()) favorites = null;
+		if (imageFileName.isEmpty()) imageFileName = null;
 		
 		return new User(name, PIN, admin, access, imageFileName, favorites);
 	}
@@ -104,28 +134,4 @@ public class Settings {
 		
 		return new Album(access, title, artist, ID);
 	}
-
-	// Private Fields
-	private Map<Restriction, Set<Album>> albums;
-	public Set<Album> getAlbums(Restriction access) { return albums.get(access); }
-	public void addAlbum(Album newAlbum) { 
-		Set<Album> currentAlbums = albums.get(newAlbum.getAccess());
-		if (!currentAlbums.contains(newAlbum)) {
-			currentAlbums.add(newAlbum); 
-		}
-	}
-	private User currentUser;
-	public User getCurrentUser() { return currentUser; }
-	public void setCurrentUser(String username, int PIN) {
-		for (User user: users) {
-			if (user.getUsername().equalsIgnoreCase(username) && user.getPIN() == PIN) { 
-				currentUser = user; 
-			}
-		}
-	}
-	
-	// Public Fields
-	public static URL serverURL;
-	public static Set<User> users;
-	
 }

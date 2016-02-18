@@ -6,7 +6,7 @@
 	
 	<currentUser>
 		<admin>true</admin>
-		<PIN>777</PIN>
+		<PIN>7777</PIN>
 		<username>defaultUser</username>
 		<access>Unrestricted</access>
 		<imageFileName></imageFileName>
