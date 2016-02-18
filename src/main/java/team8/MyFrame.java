@@ -2,13 +2,13 @@ package team8;
 
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
-import java.awt.BorderLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JPanel;
 
 public class MyFrame extends JFrame {
 	public MyFrame() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
@@ -26,7 +26,18 @@ public class MyFrame extends JFrame {
 					.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)
 					.addContainerGap())
 		);
-		getContentPane().setLayout(groupLayout);
+		
+		JPanel FavoritesTab = new FavoritesPanel();
+		tabbedPane.addTab("Favorites", null, FavoritesTab, "Locally Favorited Music\n");
+		
+		JPanel LibraryTab = new LibraryPanel();
+		tabbedPane.addTab("Library", null, LibraryTab, null);
+		
+		JPanel SettingsTab = new SettingsPanel();
+		tabbedPane.addTab("Settings", null, SettingsTab, null);
+		
+		pack();
+		
 	}
 	private static final long serialVersionUID = 1L;
 }
