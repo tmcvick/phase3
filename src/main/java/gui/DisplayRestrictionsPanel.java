@@ -124,7 +124,7 @@ public class DisplayRestrictionsPanel extends JPanel{
 		if(i == 0)
 		{
 			parent.getCardlayout().show(parent.getCards(), "home");
-		System.out.println("here");
+	
 		}
 		if(i ==1)
 			parent.getCardlayout().show(parent.getCards(),  "editrestriction");
