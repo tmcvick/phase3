@@ -1,4 +1,4 @@
-package team8;
+package domainModel;
 
 import java.io.File;
 import java.net.URL;

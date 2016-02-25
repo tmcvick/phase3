@@ -1,4 +1,4 @@
-package team8;
+package domainModel;
 
 public enum Restriction {
 	Restricted, Unrestricted;

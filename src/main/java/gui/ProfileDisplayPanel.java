@@ -1,4 +1,4 @@
-package team8;
+package gui;
 
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -36,7 +36,7 @@ public class ProfileDisplayPanel extends JPanel{
 		setLayout(new MigLayout("", "[95][95][95][95][95]", "[75][75][20][75][20][75][20][75]"));
 		BufferedImage img = null;
 		try {
-			img = ImageIO.read(new File("src/login.png"));
+			img = ImageIO.read(new File("src/main/resources/login.png"));
 		} catch (IOException e) {
 				e.printStackTrace();
 		}

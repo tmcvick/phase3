@@ -1,4 +1,4 @@
-package team8;
+package domainModel;
 
 public class Album {
 	

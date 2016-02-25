@@ -1,4 +1,4 @@
-package team8;
+package gui;
 
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
@@ -43,6 +43,7 @@ public class MyFrame extends JFrame {
 		settingsTab.add(ProfileInfoTab, "indvprofile");
 		
 		tabbedPane.addTab("Settings", null, settingsTab, null);
+		
 		getContentPane().add(tabbedPane, "name_265974599776111");
 		
 		

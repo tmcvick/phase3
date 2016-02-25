@@ -8,6 +8,11 @@ import java.net.URL;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import domainModel.Album;
+import domainModel.Restriction;
+import domainModel.Settings;
+import domainModel.User;
+
 public class SettingsTest {
 	protected static Settings settings;
 	protected static URL testURL;

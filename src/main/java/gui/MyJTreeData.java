@@ -1,4 +1,4 @@
-package team8;
+package gui;
 
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -16,6 +16,7 @@ public class MyJTreeData extends JTree
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("Albums");
         DefaultMutableTreeNode parent;
         
+            
         DefaultTreeModel model= new DefaultTreeModel(root);
         model.setRoot(null);
         JTree tree = new JTree(root);

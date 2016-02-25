@@ -1,4 +1,4 @@
-package team8;
+package gui;
 
 import javax.swing.JFrame;
 import javax.imageio.ImageIO;
@@ -37,7 +37,7 @@ public class LoginFrame extends JFrame{
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		BufferedImage img = null;
 		try {
-			img = ImageIO.read(new File("src/login.png"));
+			img = ImageIO.read(new File("src/main/resources/login.png"));
 		} catch (IOException e) {
 				e.printStackTrace();
 		}

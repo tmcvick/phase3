@@ -1,4 +1,4 @@
-package team8;
+package gui;
 
 import javax.swing.JPanel;
 import javax.swing.JButton;
@@ -12,7 +12,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class EditRestrictionsPanel extends JPanel{
+	//Allows use to reference the cardlayout	 
 	private MyFrame parent;
+	
 	public EditRestrictionsPanel(DisplayRestrictionsPanel p) {
 		setLayout(null);
 		parent = p.getParent();

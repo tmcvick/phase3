@@ -3,6 +3,9 @@ package team8;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
+import gui.LoginFrame;
+import gui.MyFrame;
+
 public class Main {
 
 	public static void main(String[] args) {

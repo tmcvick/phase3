@@ -1,4 +1,4 @@
-package team8;
+package gui;
 
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
