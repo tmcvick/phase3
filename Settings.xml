@@ -29,12 +29,26 @@
 	<users>
 		<user>
 			<admin>true</admin>
-			<PIN>7777</PIN>
-			<username>defaultUser</username>
+			<PIN>9999</PIN>
+			<username>Admin</username>
 			<access>Unrestricted</access>
-			<imageFileName></imageFileName>
+			<imageFileName>src/main/resources/admin.png</imageFileName>
 			<favorites></favorites>
 		</user>
+		<user>
+			<admin>false</admin>
+			<favorites>Album A</favorites>
+			<imageFileName>src/main/resources/child1.png</imageFileName>
+			<PIN>1111</PIN>
+			<access>Level 2</access>
+			<username>Child 1</username></user>
+		<user>
+			<access>Level 3</access>
+			<admin>false</admin>
+			<favorites>Album A, Album B</favorites>
+			<imageFileName>src/main/resources/child2.png</imageFileName>
+			<PIN>2222</PIN>
+			<username>Child 2</username></user>
 	</users>
 	
 </settings>
