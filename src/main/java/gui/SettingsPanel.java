@@ -9,6 +9,11 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * Panel showing the settings options
+ * @author tmcvick
+ *
+ */
 public class SettingsPanel extends JPanel {
 	private ChangeServerPanel changeServerPanel;
 	private DisplayRestrictionsPanel restrictionsPanel;
@@ -47,9 +52,9 @@ public class SettingsPanel extends JPanel {
 		
 		setLayout(new MigLayout("", "[200][200][200]", "[50][50][50][50][50][50]"));
 		
-		JLabel lblWhatWouldYou = new JLabel("What would you like to do?");
-		lblWhatWouldYou.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		add(lblWhatWouldYou, "cell 1 1,alignx center,aligny center");
+		JLabel lblPrompt = new JLabel("What would you like to do?");
+		lblPrompt.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		add(lblPrompt, "cell 1 1,alignx center,aligny center");
 		
 		JLabel lblChangeTheServer = new JLabel("Change the server");
 		lblChangeTheServer.addMouseListener(new MouseAdapter() {
@@ -82,11 +87,13 @@ public class SettingsPanel extends JPanel {
 		});
 		add(lblManageRestrictions, "cell 1 4,alignx center,aligny center");
 	}
-/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * switch to the appropriate panel
+	 * @param i the panel to switch to; 1 = server, 2 = profiles, 3 = restrictions
+	 */
 	private void panel_switch(int i)
 	{
 		

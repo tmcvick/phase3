@@ -5,18 +5,21 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * Class that is a popup requesting delete confirmation
+ */
 public class DeletePopup extends JFrame{
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
-private MyFrame parent;
+	private MyFrame parent;
 
+	/**
+	 * creates a new popup
+	 * @param p the EditProfilePanel that will request confirmation
+	 */
 	public DeletePopup(EditProfilePanel p) {
 		parent = p.getParent();
 		
@@ -34,11 +37,7 @@ private MyFrame parent;
 				panel_switch(-1);
 			}
 		});
-		btnDelete.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				panel_switch(-1);
-			}
-		});
+		
 		btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		getContentPane().add(btnDelete, "cell 2 2 2 1");
 		
@@ -49,15 +48,16 @@ private MyFrame parent;
 				panel_switch(0);
 			}
 		});
-		btnCancel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				panel_switch(0);
-			}
-		});
+		
 		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		getContentPane().add(btnCancel, "cell 6 2");
 		pack();
 	}
+	
+	/**
+	 * Will set the popup invisible, and then return to the appropriate screen
+	 * @param i represents the panel to switch back to: -1 = delete, 0 = cancel
+	 */
 	protected void panel_switch(int i) {
 		setVisible(false);
 		dispose();

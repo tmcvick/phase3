@@ -1,5 +1,8 @@
 package gui;
 
+/**
+ * Panel that displays all saved user profiles
+ */
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -14,26 +17,27 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class ProfileDisplayPanel extends JPanel{
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private String username = "";
 	private MyFrame parent;
 	
-		
+		/**
+		 * creates a new panel
+		 * @param parent2 the main frame 
+		 */
 	public ProfileDisplayPanel(MyFrame parent2) {
 		parent = parent2;
 		
 		
 		
 		setLayout(new MigLayout("", "[95][95][95][95][95]", "[75][75][20][75][20][75][20][75]"));
+		
+		//set up the images
 		BufferedImage img = null;
 		try {
 			img = ImageIO.read(new File("src/main/resources/login.png"));
@@ -43,6 +47,8 @@ public class ProfileDisplayPanel extends JPanel{
 		Image resized = img.getScaledInstance(50, 49, Image.SCALE_SMOOTH);
 		
 		ImageIcon image = new ImageIcon(resized);
+		
+		
 		JButton btnBack = new JButton("Back");
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
@@ -50,94 +56,90 @@ public class ProfileDisplayPanel extends JPanel{
 				switch_panel(0);
 			}
 		});
-		btnBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				switch_panel(0);
-			}
-		});
+		
 		add(btnBack, "cell 0 0,alignx left,aligny top");
 		
 		JLabel lblSelectUser = new JLabel("Select User:");
 		lblSelectUser.setFont(new Font("Tahoma", Font.BOLD, 16));
 		add(lblSelectUser, "cell 2 0,alignx center,aligny center");
 		
-		JLabel lblUser = new JLabel("User 1");
-		lblUser.addMouseListener(new MouseAdapter() {
+		JLabel lblUser1 = new JLabel("User 1");
+		lblUser1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
 				username = "User 1";
 				switch_panel(2);
 			}
 		});
-		lblUser.setIcon(image);
-		lblUser.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblUser.setVerticalTextPosition(SwingConstants.BOTTOM);
-		add(lblUser, "cell 1 1,alignx center,aligny center");
+		lblUser1.setIcon(image);
+		lblUser1.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblUser1.setVerticalTextPosition(SwingConstants.BOTTOM);
+		add(lblUser1, "cell 1 1,alignx center,aligny center");
 		
-		JLabel lblUser_1 = new JLabel("User 2");
-		lblUser_1.addMouseListener(new MouseAdapter() {
+		JLabel lblUser2 = new JLabel("User 2");
+		lblUser2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				username = "User 2";
 				switch_panel(2);
 			}
 		});
-		lblUser_1.setIcon(image);
-		lblUser_1.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblUser_1.setVerticalTextPosition(SwingConstants.BOTTOM);
-		add(lblUser_1, "cell 3 1,alignx center,aligny center");
+		lblUser2.setIcon(image);
+		lblUser2.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblUser2.setVerticalTextPosition(SwingConstants.BOTTOM);
+		add(lblUser2, "cell 3 1,alignx center,aligny center");
 		
-		JLabel lblUser_2 = new JLabel("User 3");
-		lblUser_2.addMouseListener(new MouseAdapter() {
+		JLabel lblUser3 = new JLabel("User 3");
+		lblUser3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				username = "User 3";
 				switch_panel(2);
 			}
 		});
-		lblUser_2.setIcon(image);
-		lblUser_2.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblUser_2.setVerticalTextPosition(SwingConstants.BOTTOM);
-		add(lblUser_2, "cell 1 3,alignx center,aligny center");
+		lblUser3.setIcon(image);
+		lblUser3.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblUser3.setVerticalTextPosition(SwingConstants.BOTTOM);
+		add(lblUser3, "cell 1 3,alignx center,aligny center");
 		
-		JLabel lblUser_3 = new JLabel("User 4");
-		lblUser_3.addMouseListener(new MouseAdapter() {
+		JLabel lblUser4 = new JLabel("User 4");
+		lblUser4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				username = "User 4";
 				switch_panel(2);
 			}
 		});
-		lblUser_3.setIcon(image);
-		lblUser_3.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblUser_3.setVerticalTextPosition(SwingConstants.BOTTOM);
-		add(lblUser_3, "cell 3 3,alignx center,aligny center");
+		lblUser4.setIcon(image);
+		lblUser4.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblUser4.setVerticalTextPosition(SwingConstants.BOTTOM);
+		add(lblUser4, "cell 3 3,alignx center,aligny center");
 		
-		JLabel lblUser_4 = new JLabel("User 5");
-		lblUser_4.addMouseListener(new MouseAdapter() {
+		JLabel lblUser5 = new JLabel("User 5");
+		lblUser5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				username = "User 5";
 				switch_panel(2);
 			}
 		});
-		lblUser_4.setIcon(image);
-		lblUser_4.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblUser_4.setVerticalTextPosition(SwingConstants.BOTTOM);
-		add(lblUser_4, "cell 1 5,alignx center,aligny center");
+		lblUser5.setIcon(image);
+		lblUser5.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblUser5.setVerticalTextPosition(SwingConstants.BOTTOM);
+		add(lblUser5, "cell 1 5,alignx center,aligny center");
 		
-		JLabel lblUser_5 = new JLabel("User 6");
-		lblUser_5.addMouseListener(new MouseAdapter() {
+		JLabel lblUser6 = new JLabel("User 6");
+		lblUser6.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				username = "User 6";
 				switch_panel(2);
 			}
 		});
-		lblUser_5.setIcon(image);
-		lblUser_5.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblUser_5.setVerticalTextPosition(SwingConstants.BOTTOM);
-		add(lblUser_5, "cell 3 5,alignx center,aligny center");
+		lblUser6.setIcon(image);
+		lblUser6.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblUser6.setVerticalTextPosition(SwingConstants.BOTTOM);
+		add(lblUser6, "cell 3 5,alignx center,aligny center");
 		
 		JButton btnNew = new JButton("New");
 		btnNew.addMouseListener(new MouseAdapter() {
@@ -148,16 +150,14 @@ public class ProfileDisplayPanel extends JPanel{
 				switch_panel(1);
 			}
 		});
-		btnNew.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				EditProfilePanel newChild = parent.getHome().getEditProfilePanel();;
-				newChild.clearFields();
-				switch_panel(1);
-			}
-		});
+		
 		add(btnNew, "cell 2 7,alignx center,aligny center");
 	}
 	
+	/**
+	 * switches to the appropriate panel
+	 * @param i the panel to switch to: 0 = home, 1 = new, 2 = view profile
+	 */
 	private void switch_panel(int i)
 	{
 		
@@ -174,10 +174,17 @@ public class ProfileDisplayPanel extends JPanel{
 		}
 	}
 
+	/**
+	 * @return the main frame
+	 */
 	public MyFrame getParent() {
 		return parent;
 	}
 
+	/**
+	 * 
+	 * @return the settings home panel
+	 */
 	public SettingsPanel getSettings() {
 		
 		return parent.getHome();

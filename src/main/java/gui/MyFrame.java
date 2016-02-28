@@ -5,10 +5,19 @@ import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 import java.awt.CardLayout;
 
+/**
+ * The main frame of the program
+ * @author tmcvick
+ *
+ */
 public class MyFrame extends JFrame {
+	
+	//for use when switching settings panels
 	private CardLayout cardlayout;
 	private JPanel SettingsTab;
-	private JPanel settingsTab;
+	private JPanel cardBackgroundPanel;
+	
+	
 	public MyFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(new CardLayout(0, 0));
@@ -21,10 +30,12 @@ public class MyFrame extends JFrame {
 		JPanel LibraryTab = new LibraryPanel();
 		tabbedPane.addTab("Library", null, LibraryTab, null);
 		
-		settingsTab = new JPanel();
-		settingsTab.setLayout(new CardLayout());
-		cardlayout = (CardLayout) settingsTab.getLayout();
+		cardBackgroundPanel = new JPanel();
+		cardBackgroundPanel.setLayout(new CardLayout());
+		cardlayout = (CardLayout) cardBackgroundPanel.getLayout();
 		
+		
+		//Set up the multiple settings panels
 		SettingsTab = new SettingsPanel(this);
 		JPanel ServerTab = ((SettingsPanel) SettingsTab).getChangeServerPanel();
 		JPanel RestrictionTab = ((SettingsPanel) SettingsTab).getRestrictionsPanel();
@@ -34,15 +45,15 @@ public class MyFrame extends JFrame {
 		JPanel ProfileInfoTab = ((SettingsPanel) SettingsTab).getProfileInfoPanel();
 		
 		
-		settingsTab.add(SettingsTab, "home");
-		settingsTab.add(ServerTab, "server");
-		settingsTab.add(RestrictionTab, "restrict");
-		settingsTab.add(ProfileTab, "profile");
-		settingsTab.add(EditProfileTab, "editprofile");
-		settingsTab.add(EditRestrictionsTab, "editrestriction");
-		settingsTab.add(ProfileInfoTab, "indvprofile");
+		cardBackgroundPanel.add(SettingsTab, "home");
+		cardBackgroundPanel.add(ServerTab, "server");
+		cardBackgroundPanel.add(RestrictionTab, "restrict");
+		cardBackgroundPanel.add(ProfileTab, "profile");
+		cardBackgroundPanel.add(EditProfileTab, "editprofile");
+		cardBackgroundPanel.add(EditRestrictionsTab, "editrestriction");
+		cardBackgroundPanel.add(ProfileInfoTab, "indvprofile");
 		
-		tabbedPane.addTab("Settings", null, settingsTab, null);
+		tabbedPane.addTab("Settings", null, cardBackgroundPanel, null);
 		
 		getContentPane().add(tabbedPane, "name_265974599776111");
 		
@@ -50,18 +61,31 @@ public class MyFrame extends JFrame {
 		pack();
 		
 	}
+	
+	/**
+	 * 
+	 * @return the layout of the settings tab
+	 */
 	public CardLayout getCardlayout() {
 		return cardlayout;
 	}
 	
+	/**
+	 * 
+	 * @return the home settings panel (with the options)
+	 */
 	public SettingsPanel getHome()
 	{
 	return (SettingsPanel) SettingsTab;
 	}
 	
+	/**
+	 * 
+	 * @return the background panel for the settings tab
+	 */
 	public JPanel getCards()
 	{
-		return settingsTab;
+		return cardBackgroundPanel;
 	}
 	private static final long serialVersionUID = 1L;
 }

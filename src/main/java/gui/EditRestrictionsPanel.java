@@ -6,16 +6,25 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * Class that represents the editing restrictions panel
+ * @author tmcvick
+ *
+ */
 public class EditRestrictionsPanel extends JPanel{
-	//Allows use to reference the cardlayout	 
+	//Allows us to reference the cardlayout	 
 	private MyFrame parent;
 	
+	/**
+	 * creates a new editrestrictionpanel
+	 * @param p the panel that switches to this
+	 */
 	public EditRestrictionsPanel(DisplayRestrictionsPanel p) {
+		
+		//absolute layout
 		setLayout(null);
 		parent = p.getParent();
 		
@@ -26,11 +35,7 @@ public class EditRestrictionsPanel extends JPanel{
 				panel_switch(0);
 			}
 		});
-		btnSubmit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				panel_switch(0);
-			}
-		});
+		
 		btnSubmit.setBounds(351, 11, 89, 23);
 		add(btnSubmit);
 		
@@ -41,11 +46,7 @@ public class EditRestrictionsPanel extends JPanel{
 				panel_switch(0);
 			}
 		});
-		btnCancel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				panel_switch(0);
-			}
-		});
+		
 		btnCancel.setBounds(10, 11, 89, 23);
 		add(btnCancel);
 		
@@ -80,42 +81,47 @@ public class EditRestrictionsPanel extends JPanel{
 		lblAlbumE.setBounds(133, 237, 73, 14);
 		add(lblAlbumE);
 		
-		textField = new JTextField();
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField.setText("1");
-		textField.setBounds(202, 40, 58, 34);
-		add(textField);
-		textField.setColumns(10);
+		//the textfields which represent the albums' restriction level
+		textFieldA = new JTextField();
+		textFieldA.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textFieldA.setText("1");
+		textFieldA.setBounds(202, 40, 58, 34);
+		add(textFieldA);
+		textFieldA.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_1.setText("1");
-		textField_1.setBounds(203, 83, 57, 34);
-		add(textField_1);
-		textField_1.setColumns(10);
+		textFieldB = new JTextField();
+		textFieldB.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textFieldB.setText("1");
+		textFieldB.setBounds(203, 83, 57, 34);
+		add(textFieldB);
+		textFieldB.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_2.setText("1");
-		textField_2.setBounds(203, 134, 57, 34);
-		add(textField_2);
-		textField_2.setColumns(10);
+		textFieldC = new JTextField();
+		textFieldC.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textFieldC.setText("1");
+		textFieldC.setBounds(203, 134, 57, 34);
+		add(textFieldC);
+		textFieldC.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_3.setText("3");
-		textField_3.setBounds(203, 182, 57, 34);
-		add(textField_3);
-		textField_3.setColumns(10);
+		textFieldD = new JTextField();
+		textFieldD.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textFieldD.setText("3");
+		textFieldD.setBounds(203, 182, 57, 34);
+		add(textFieldD);
+		textFieldD.setColumns(10);
 		
-		textField_4 = new JTextField();
-		textField_4.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_4.setText("3");
-		textField_4.setBounds(203, 227, 57, 34);
-		add(textField_4);
-		textField_4.setColumns(10);
+		textFieldE = new JTextField();
+		textFieldE.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textFieldE.setText("3");
+		textFieldE.setBounds(203, 227, 57, 34);
+		add(textFieldE);
+		textFieldE.setColumns(10);
 	}
 
+	/**
+	 * switches back to the previous panel (display restrictions)
+	 * @param i unused
+	 */
 	private void panel_switch(int i) {
 	
 		if(i == 0)
@@ -123,13 +129,11 @@ public class EditRestrictionsPanel extends JPanel{
 		
 	}
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField textFieldA;
+	private JTextField textFieldB;
+	private JTextField textFieldC;
+	private JTextField textFieldD;
+	private JTextField textFieldE;
 }

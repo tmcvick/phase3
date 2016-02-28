@@ -9,6 +9,7 @@ import gui.MyFrame;
 public class Main {
 
 	public static void main(String[] args) {
+		//Set look and feel
 		try {
 		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 		        if ("Nimbus".equals(info.getName())) {
@@ -19,8 +20,11 @@ public class Main {
 		} catch (Exception e) {
 		    // If Nimbus is not available, you can set the GUI to another look and feel.
 		}
+		//open authentication frame
 		LoginFrame l = new LoginFrame();
 		l.setVisible(true);
+		
+		//create frame
 		MyFrame w = new MyFrame();
 		l.getLogin(w);
 				

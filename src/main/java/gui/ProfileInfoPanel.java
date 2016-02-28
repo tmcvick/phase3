@@ -19,28 +19,35 @@ import javax.swing.JTextField;
 import javax.swing.JList;
 import javax.swing.AbstractListModel;
 import java.awt.SystemColor;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * Displays a single user profile
+ * @author tmcvick
+ *
+ */
 public class ProfileInfoPanel extends JPanel{
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
-	private JTextField textField;
-	private JTextField txtFilepng;
-	private JTextField textField_1;
-	private JTextField txtAdmin;
+	private JTextField textFieldPIN;
+	private JTextField txtFieldFilename;
+	private JTextField textFieldRestriction;
+	private JTextField txtFieldType;
 	private MyFrame parent;
 	
-	private JLabel lblUser;
+	private JLabel lblUsername;
 	
+	/**
+	 * creates a new panel
+	 * @param p the previous panel
+	 */
 	public ProfileInfoPanel(ProfileDisplayPanel p) {
 		parent = p.getParent();
 		
 		setLayout(new MigLayout("", "[125][125,grow][][125,grow][125,grow]", "[75][75,grow][75][75][150,grow]"));
+		
+		//to display image
 		BufferedImage img = null;
 		try {
 			img = ImageIO.read(new File("src/main/resources/login.png"));
@@ -50,6 +57,8 @@ public class ProfileInfoPanel extends JPanel{
 		Image resized = img.getScaledInstance(50, 49, Image.SCALE_SMOOTH);
 		
 		ImageIcon image = new ImageIcon(resized);
+		
+		
 		JButton btnBack = new JButton("Back");
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
@@ -57,92 +66,80 @@ public class ProfileInfoPanel extends JPanel{
 				panel_switch(0);
 			}
 		});
-		btnBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				panel_switch(0);
-			}
-		});
+		
 		add(btnBack, "cell 0 0,alignx left,aligny top");
 		
-		lblUser = new JLabel("User 1");
-		lblUser.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblUser.setIcon(image);
-		lblUser.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblUser.setVerticalTextPosition(SwingConstants.BOTTOM);
-		add(lblUser, "cell 2 0,alignx center,aligny bottom");
+		lblUsername = new JLabel("User 1");
+		lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblUsername.setIcon(image);
+		lblUsername.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblUsername.setVerticalTextPosition(SwingConstants.BOTTOM);
+		add(lblUsername, "cell 2 0,alignx center,aligny bottom");
 		
 		JButton btnEdit = new JButton("Edit");
 		btnEdit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				EditProfilePanel child = parent.getHome().getEditProfilePanel();
-				child.setUsername(lblUser.getText(), txtAdmin.getText());
+				child.setUsername(lblUsername.getText(), txtFieldType.getText());
 				panel_switch(1);
 			}
 		});
-		btnEdit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				EditProfilePanel child = parent.getHome().getEditProfilePanel();
-				child.setUsername(lblUser.getText(), txtAdmin.getText());
-				panel_switch(1);
-			}
-		});
+		
 		add(btnEdit, "cell 4 0,alignx right,aligny top");
 		
 		JLabel lblPin = new JLabel("PIN:");
 		lblPin.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		add(lblPin, "cell 0 1,alignx trailing,aligny bottom");
 		
-		textField = new JTextField();
-		textField.setEditable(false);
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField.setText("1234");
-		add(textField, "cell 1 1,growx,aligny bottom");
-		textField.setColumns(10);
+		textFieldPIN = new JTextField();
+		textFieldPIN.setEditable(false);
+		textFieldPIN.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textFieldPIN.setText("1234");
+		add(textFieldPIN, "cell 1 1,growx,aligny bottom");
+		textFieldPIN.setColumns(10);
 		
 		JLabel lblUserType = new JLabel("User Type:");
 		lblUserType.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		add(lblUserType, "cell 3 1,alignx trailing,aligny bottom");
 		
-		txtAdmin = new JTextField();
-		txtAdmin.setEditable(false);
-		txtAdmin.setText("Admin");
-		txtAdmin.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		add(txtAdmin, "cell 4 1,growx,aligny bottom");
-		txtAdmin.setColumns(10);
+		txtFieldType = new JTextField();
+		txtFieldType.setEditable(false);
+		txtFieldType.setText("Admin");
+		txtFieldType.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		add(txtFieldType, "cell 4 1,growx,aligny bottom");
+		txtFieldType.setColumns(10);
 		
 		JLabel lblImageFilename = new JLabel("Image Filename:");
 		lblImageFilename.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		add(lblImageFilename, "cell 0 2,alignx trailing,aligny bottom");
 		
-		txtFilepng = new JTextField();
-		txtFilepng.setEditable(false);
-		txtFilepng.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		txtFilepng.setText("file.png");
-		add(txtFilepng, "cell 1 2,growx,aligny bottom");
-		txtFilepng.setColumns(10);
+		txtFieldFilename = new JTextField();
+		txtFieldFilename.setEditable(false);
+		txtFieldFilename.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		txtFieldFilename.setText("file.png");
+		add(txtFieldFilename, "cell 1 2,growx,aligny bottom");
+		txtFieldFilename.setColumns(10);
 		
 		JLabel lblRestriction = new JLabel("Restriction Level:");
 		lblRestriction.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		add(lblRestriction, "cell 0 3,alignx trailing,aligny bottom");
 		
-		textField_1 = new JTextField();
-		textField_1.setEditable(false);
-		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_1.setText("1");
-		add(textField_1, "cell 1 3,alignx left,aligny bottom");
-		textField_1.setColumns(4);
+		textFieldRestriction = new JTextField();
+		textFieldRestriction.setEditable(false);
+		textFieldRestriction.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textFieldRestriction.setText("1");
+		add(textFieldRestriction, "cell 1 3,alignx left,aligny bottom");
+		textFieldRestriction.setColumns(4);
 		
 		JLabel lblFavorites = new JLabel("Favorites:");
 		lblFavorites.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		add(lblFavorites, "cell 3 3,alignx center,aligny bottom");
 		
-		JList<String> list = new JList<String>();
-		list.setBackground(SystemColor.menu);
-		list.setModel(new AbstractListModel<String>() {
-			/**
-			 * 
-			 */
+		JList<String> listFavorites = new JList<String>();
+		listFavorites.setBackground(SystemColor.menu);
+		listFavorites.setModel(new AbstractListModel<String>() {
+			
 			private static final long serialVersionUID = 1L;
 			String[] values = new String[] {"Album 1", "Album 2", "Album 3"};
 			public int getSize() {
@@ -152,10 +149,14 @@ public class ProfileInfoPanel extends JPanel{
 				return values[index];
 			}
 		});
-		list.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		add(list, "cell 3 4,alignx center,growy");
+		listFavorites.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		add(listFavorites, "cell 3 4,alignx center,growy");
 	}
 
+	/**
+	 * switches to the appropriate panel
+	 * @param i the panel to switch to; 0 = back, 1 = edit
+	 */
 	private void panel_switch(int i) {
 		
 		if(i == 0)
@@ -165,15 +166,21 @@ public class ProfileInfoPanel extends JPanel{
 		
 	}
 
+	/**
+	 * sets the username and type
+	 * @param username the username
+	 */
 	public void setUsername(String username) {
-		lblUser.setText(username);
+		lblUsername.setText(username);
 		if(!username.equals("User 1"))
-			txtAdmin.setText("Child");
+			txtFieldType.setText("Child");
 		
 		
 	}
 
-	
+	/**
+	 * @return the main frame
+	 */
 	public MyFrame getParent() {
 		return parent;
 	}

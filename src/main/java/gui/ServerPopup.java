@@ -9,13 +9,19 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import net.miginfocom.swing.MigLayout;
 
+/**
+ * frame that displays a "verifying server" popup
+ *
+ * @author tmcvick
+ *
+ */
 public class ServerPopup extends JFrame{
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private JLabel lblServerFound;
 	private JButton btnClose;
+	
+	
 	public ServerPopup() {
 		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,6 +49,12 @@ public class ServerPopup extends JFrame{
 		btnClose.setVisible(false);
 		pack();
 	}
+	
+	/**
+	 * overrides the inherited setVisible
+	 * this is where the frame asks for server verification
+	 * currently set to automatically verify server
+	 */
 	public void setVisible(boolean bool)
 	{
 		super.setVisible(bool);

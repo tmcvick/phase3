@@ -6,19 +6,22 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * Class that represents the panel where a user can change the server
+ */
 public class ChangeServerPanel extends JPanel {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
-	private JTextField txtWwwfakeservercom;
-	private JTextField textField;
+	private JTextField txtFieldOldServer;
+	private JTextField txtFieldNewServer;
 	private MyFrame parent;
+	
+	/*
+	 * Creates a new instance, with an argument of the Main Frame (to use the layout)
+	 */
 	public ChangeServerPanel(MyFrame parent2) {
 		parent = parent2;
 		setLayout(new MigLayout("", "[100][400,grow][100]", "[50][50][50][50][50][50][50]"));
@@ -35,25 +38,26 @@ public class ChangeServerPanel extends JPanel {
 		JLabel lblCurrentServer = new JLabel("Current Server:");
 		add(lblCurrentServer, "cell 1 1,alignx center,aligny bottom");
 		
-		txtWwwfakeservercom = new JTextField();
-		txtWwwfakeservercom.setHorizontalAlignment(SwingConstants.CENTER);
-		txtWwwfakeservercom.setEditable(false);
-		txtWwwfakeservercom.setText("www.fakeserver.com");
-		add(txtWwwfakeservercom, "cell 1 2,alignx center,aligny center");
-		txtWwwfakeservercom.setColumns(50);
+		txtFieldOldServer = new JTextField();
+		txtFieldOldServer.setHorizontalAlignment(SwingConstants.CENTER);
+		txtFieldOldServer.setEditable(false);
+		txtFieldOldServer.setText("www.fakeserver.com");
+		add(txtFieldOldServer, "cell 1 2,alignx center,aligny center");
+		txtFieldOldServer.setColumns(50);
 		
 		JLabel lblEnterNewServer = new JLabel("Enter new server:");
 		add(lblEnterNewServer, "cell 1 3,alignx center,aligny bottom");
 		
-		textField = new JTextField();
-		textField.setHorizontalAlignment(SwingConstants.CENTER);
-		add(textField, "cell 1 4,growx,aligny center");
-		textField.setColumns(10);
+		txtFieldNewServer = new JTextField();
+		txtFieldNewServer.setHorizontalAlignment(SwingConstants.CENTER);
+		add(txtFieldNewServer, "cell 1 4,growx,aligny center");
+		txtFieldNewServer.setColumns(10);
 		
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
+				//popup will show, and then disappear after a second
 				ServerPopup pop = new ServerPopup();
 				pop.setVisible(true);
 				try {
@@ -65,22 +69,13 @@ public class ChangeServerPanel extends JPanel {
 				switch_back();
 			}
 		});
-		btnSubmit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ServerPopup pop = new ServerPopup();
-				pop.setVisible(true);
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e1) {
-					
-					e1.printStackTrace();
-				}
-				switch_back();
-				}
-		});
+		
 		add(btnSubmit, "cell 1 5,alignx center,aligny center");
 	}
 	
+	/*
+	 * Will switch the panel showing to the settings home panel
+	 */
 	private void switch_back()
 	{
 		parent.getCardlayout().show(parent.getCards(), "home");
