@@ -182,6 +182,7 @@ public class LoginFrame extends JFrame {
 	public void login() {
 		
 		char[] entered = passwordField.getPassword();
+		
 		if(control.checkPassword(select, entered))
 		{
 			this.setVisible(false);

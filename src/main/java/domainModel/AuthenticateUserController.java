@@ -24,8 +24,9 @@ public class AuthenticateUserController {
 	}
 
 	public boolean checkPassword(int i, char[] entered) {
-		String string = entered.toString();
-		int pw = Integer.parseInt(string);
+		
+				
+		int pw = Integer.parseInt(new String(entered));
 		
 		return (list.get(i).getPIN() == pw);
 			
