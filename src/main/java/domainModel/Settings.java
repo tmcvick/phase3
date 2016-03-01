@@ -39,6 +39,11 @@ public class Settings {
 	}
 	private User currentUser;
 	public User getCurrentUser() { return currentUser; }
+	public void setCurrentUser(User u)
+	{
+		currentUser = u;
+	}
+	
 	public void setCurrentUser(String username, int PIN) {
 		for (User user: users) {
 			if (user.getUsername().equalsIgnoreCase(username) && user.getPIN() == PIN) { 
@@ -50,6 +55,8 @@ public class Settings {
 	// Public Fields
 	public static URL serverURL;
 	public static Set<User> users;
+	
+	
 	
 	// Methods
 	public void load() {

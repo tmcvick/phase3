@@ -1,18 +1,39 @@
 package domainModel;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AuthenticateUserController {
-
-	public ArrayList<User> getUsers() {
-		ArrayList<User> list = new ArrayList<User>();
+	private Settings settings;
+	private Map<Integer, User> list;
+	public AuthenticateUserController()
+	{
+		settings = Settings.getInstance();
+	}
+	
+	public Map<Integer, User> getUsers() {
+		
+		list = new HashMap<Integer, User>();
+		int i = 0;
+		for(User user : Settings.users)
+		{
+			list.put(i, user);
+		}
 		
 		return list;
 	}
 
-	public boolean checkPassword(char[] entered) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean checkPassword(int i, char[] entered) {
+		String string = entered.toString();
+		int pw = Integer.parseInt(string);
+		
+		return (list.get(i).getPIN() == pw);
+			
+	}
+
+	public void setCurrUser(int select) {
+		settings.setCurrentUser(list.get(select));
+		
 	}
 
 	

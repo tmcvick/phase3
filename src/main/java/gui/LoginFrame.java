@@ -9,7 +9,9 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Objects;
 
 import javax.swing.SwingConstants;
 
@@ -43,14 +45,9 @@ public class LoginFrame extends JFrame {
 	private JButton btnSubmit;
 	private JLabel lblEnterPin;
 	private JLabel lblUser1;
-	private JLabel lblUser2;
-	private JLabel lblUser3;
-	private JLabel lblUser4;
-	private JLabel lblUser5;
-
 	private AuthenticateUserController control;
 
-	private ArrayList<User> users;
+	private Map<Integer, User> users;
 
 	
 
@@ -115,7 +112,7 @@ public class LoginFrame extends JFrame {
 		// each label has a mouse listener
 		int i = 0;
 		int row=0, column=0;
-		for (User user : users) {
+		for (User user : users.values()) {
 			column = (2 * i) + 2;
 			i++;
 			if(i < 4)
@@ -130,6 +127,13 @@ public class LoginFrame extends JFrame {
 				@Override
 				public void mousePressed(MouseEvent arg0) {
 					lblUsername.setText(lblUser1.getText());
+					
+					for(Entry<Integer, User> entry : users.entrySet())
+					{
+						if(Objects.equals(lblUser1.getText(), entry.getValue().getUsername()))
+							select = entry.getKey();
+					}
+					
 					btnSubmit.setVisible(true);
 					passwordField.setVisible(true);
 					lblEnterPin.setVisible(true);
@@ -170,26 +174,35 @@ public class LoginFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JLabel lblWrongPin;
 
+	private int select;
+
 	/**
 	 * Will set the main Frame visible upon authentication
 	 */
 	public void login() {
 		
 		char[] entered = passwordField.getPassword();
-		if(control.checkPassword(entered))
+		if(control.checkPassword(select, entered))
 		{
 			this.setVisible(false);
+			control.setCurrUser(select);
 			screen.setVisible(true);
 		}
 		else
+			
 		{
 		//print error at 4, 5	
 			wrong_pin();
 		}
 	}
 
+	/**
+	 * Will set the Wrong Pin label to visible
+	 * A method that can be modified to handle scenarios in the future
+	 */
 	private void wrong_pin() {
 		lblWrongPin.setVisible(true);
+		passwordField.setText("");
 		
 	}
 

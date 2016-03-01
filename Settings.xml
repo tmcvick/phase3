@@ -40,10 +40,10 @@
 			<favorites>Album A</favorites>
 			<imageFileName>src/main/resources/child1.png</imageFileName>
 			<PIN>1111</PIN>
-			<access>Level 2</access>
+			<access>Unrestricted</access>
 			<username>Child 1</username></user>
 		<user>
-			<access>Level 3</access>
+			<access>Unrestricted</access>
 			<admin>false</admin>
 			<favorites>Album A, Album B</favorites>
 			<imageFileName>src/main/resources/child2.png</imageFileName>
