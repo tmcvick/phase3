@@ -35,28 +35,52 @@ import java.awt.Color;
  */
 public class LoginFrame extends JFrame {
 
+/*****************************FIELDS********************************************/
+	
 	/**
 	 * Main Frame of the program
 	 */
 	private MyFrame screen;
-
+	
+	/**
+	 * Swing components
+	 */
 	private JLabel lblUsername;
 	private JPasswordField passwordField;
 	private JButton btnSubmit;
 	private JLabel lblEnterPin;
 	private JLabel lblUser1;
-	private AuthenticateUserController control;
-
-	private Map<Integer, User> users;
-
+	private static final long serialVersionUID = 1L;
+	private JLabel lblWrongPin;
 	
-
+	
+	/**
+	 * Controller for the Authentication
+	 */
+	private AuthenticateUserController control;
+	
+	/**
+	 * TreeMap of integers (User #) to User objects
+	 */
+	private Map<Integer, User> users;
+	
+	
+	/**
+	 * Represents the key in the map for the user logging in
+	 */
+	private int select;
+	
+	
+	
+/*****************************INTERFACE*****************************************/
 	/**
 	 * Creates a new instance of LoginFrame
+	 * 
 	 */
 	public LoginFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+		//load users from settings
 		populate_lists();
 		
 
@@ -122,13 +146,14 @@ public class LoginFrame extends JFrame {
 				row = 2;
 			else
 				row = 3;
-			System.out.println(user.getUsername() + " " + row + "," + column);
+			
 			lblUser1 = new JLabel(user.getUsername());
 			lblUser1.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent arg0) {
 					lblUsername.setText(user.getUsername());
 					
+					//Find the key of selected user to set select to
 					for(Entry<Integer, User> entry : users.entrySet())
 					{
 						if(Objects.equals(user.getUsername(), entry.getValue().getUsername()))
@@ -161,6 +186,8 @@ public class LoginFrame extends JFrame {
 		pack();
 	}
 
+	
+/**************************************METHODS*********************************************************/	
 	/**
 	 * Will use the controller to load the users and images from Settings file
 	 * 
@@ -168,15 +195,11 @@ public class LoginFrame extends JFrame {
 	private void populate_lists() {
 		control = new AuthenticateUserController();
 		users = control.getUsers();
-				
-
+	
 	}
 
-	private static final long serialVersionUID = 1L;
-	private JLabel lblWrongPin;
-
-	private int select;
-
+	
+	
 	/**
 	 * Will set the main Frame visible upon authentication
 	 */
@@ -198,6 +221,8 @@ public class LoginFrame extends JFrame {
 		}
 	}
 
+	
+	
 	/**
 	 * Will set the Wrong Pin label to visible
 	 * A method that can be modified to handle scenarios in the future
@@ -208,12 +233,14 @@ public class LoginFrame extends JFrame {
 		
 	}
 
+	
+	
 	/**
 	 * sets the instance variable screen to the main frame, allowing the login
 	 * frame to set it visible upon authentication
 	 * 
-	 * @param input
-	 *            the main frame for the program
+	 * @param input the main frame for the program
+	 *            
 	 */
 	public void getLogin(MyFrame input) {
 		screen = input;

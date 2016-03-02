@@ -42,6 +42,7 @@ public class Settings {
 	public void setCurrentUser(User u)
 	{
 		currentUser = u;
+		
 	}
 	
 	public void setCurrentUser(String username, int PIN) {
