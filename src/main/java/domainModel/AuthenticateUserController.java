@@ -1,7 +1,7 @@
 package domainModel;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class AuthenticateUserController {
 	private Settings settings;
@@ -13,11 +13,11 @@ public class AuthenticateUserController {
 	
 	public Map<Integer, User> getUsers() {
 		
-		list = new HashMap<Integer, User>();
+		list = new TreeMap<Integer, User>();
 		int i = 0;
 		for(User user : Settings.users)
 		{
-			list.put(i, user);
+			list.put(i++, user);
 		}
 		
 		return list;

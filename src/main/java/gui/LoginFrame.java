@@ -64,25 +64,24 @@ public class LoginFrame extends JFrame {
 		JLabel lblWelcomePleaseSelect = new JLabel("Welcome! Please select a user:");
 		lblWelcomePleaseSelect.setHorizontalAlignment(SwingConstants.CENTER);
 		lblWelcomePleaseSelect.setFont(new Font("Times New Roman", Font.BOLD, 18));
-		getContentPane().setLayout(new MigLayout("", "[75px][75][75px][75][75,grow][75][75px][75px][75px]",
-				"[75px][75px][75][75][75][75px]"));
+		getContentPane().setLayout(new MigLayout("", "[75px][75][75px][75][75,grow][75][75px][75px][75px]", "[75px][75px][75][75][75][75][75px]"));
 		getContentPane().add(lblWelcomePleaseSelect, "cell 0 0 9 1,grow");
 
 		// Username label- blank until a user is clicked
 		lblUsername = new JLabel("");
 		lblUsername.setFont(new Font("Tahoma", Font.BOLD, 16));
-		getContentPane().add(lblUsername, "cell 4 3,alignx center,aligny center");
+		getContentPane().add(lblUsername, "cell 4 4,alignx center,aligny center");
 
 		// enter pin prompt- blank until a user is clicked
 		lblEnterPin = new JLabel("Enter Pin:");
 		lblEnterPin.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		getContentPane().add(lblEnterPin, "cell 3 4,alignx trailing,aligny center");
+		getContentPane().add(lblEnterPin, "cell 3 5,alignx trailing,aligny center");
 
 		// field to represent pin-blank until a user is clicked
 		passwordField = new JPasswordField();
 		passwordField.setColumns(6);
 		passwordField.setEchoChar('*');
-		getContentPane().add(passwordField, "cell 4 4,alignx center,aligny center");
+		getContentPane().add(passwordField, "cell 4 5,alignx center,aligny center");
 
 		// submit button-blank until a user is clicked
 		btnSubmit = new JButton("Submit");
@@ -97,12 +96,12 @@ public class LoginFrame extends JFrame {
 			}
 			
 		});
-		getContentPane().add(btnSubmit, "cell 5 4,alignx center,aligny center");
+		getContentPane().add(btnSubmit, "cell 5 5,alignx center,aligny center");
 		
 		lblWrongPin = new JLabel("Wrong PIN!");
 		lblWrongPin.setForeground(Color.RED);
 		lblWrongPin.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		getContentPane().add(lblWrongPin, "cell 4 5,alignx center,aligny top");
+		getContentPane().add(lblWrongPin, "cell 4 6,alignx center,aligny top");
 		lblWrongPin.setVisible(false);
 		btnSubmit.setVisible(false);
 		passwordField.setVisible(false);
@@ -110,27 +109,29 @@ public class LoginFrame extends JFrame {
 
 		// print all user labels within window
 		// each label has a mouse listener
-		int i = 0;
+		int i = 0, k = 0;
 		int row=0, column=0;
 		for (User user : users.values()) {
-			column = (2 * i) + 2;
+			column = (2 * k) + 2;
 			i++;
+			if(++k == 3)
+				k = 0;
 			if(i < 4)
 				row = 1;
-			else if(i < 8)
+			else if(i < 7)
 				row = 2;
 			else
 				row = 3;
-			
+			System.out.println(user.getUsername() + " " + row + "," + column);
 			lblUser1 = new JLabel(user.getUsername());
 			lblUser1.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent arg0) {
-					lblUsername.setText(lblUser1.getText());
+					lblUsername.setText(user.getUsername());
 					
 					for(Entry<Integer, User> entry : users.entrySet())
 					{
-						if(Objects.equals(lblUser1.getText(), entry.getValue().getUsername()))
+						if(Objects.equals(user.getUsername(), entry.getValue().getUsername()))
 							select = entry.getKey();
 					}
 					
@@ -146,7 +147,7 @@ public class LoginFrame extends JFrame {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			Image resized = img.getScaledInstance(50, 49, Image.SCALE_SMOOTH);
+			Image resized = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 
 			ImageIcon image = new ImageIcon(resized);
 			lblUser1.setIcon(image);
@@ -167,7 +168,7 @@ public class LoginFrame extends JFrame {
 	private void populate_lists() {
 		control = new AuthenticateUserController();
 		users = control.getUsers();
-		
+				
 
 	}
 
