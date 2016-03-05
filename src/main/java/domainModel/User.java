@@ -19,11 +19,11 @@ public class User {
 	
 	// Public Fields
 	public String imageFileName;
-	public Set<Album> favorites;
+	public Set<String> favorites;
 	
 	// Constructors
 	public User(String username, int PIN, boolean admin, Restriction access, String imageFileName,
-			Set<Album> favorites) {
+			Set<String> favorites) {
 		super();
 		this.username = username;
 		this.PIN = PIN;
@@ -50,6 +50,9 @@ public class User {
 	}
 	
 	// Auto Generated Methods
+	
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -61,6 +64,10 @@ public class User {
 		result = prime * result + ((imageFileName == null) ? 0 : imageFileName.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
+	}
+	@Override
+	public String toString() {
+		return "User [username=" + username + "]";
 	}
 	@Override
 	public boolean equals(Object obj) {

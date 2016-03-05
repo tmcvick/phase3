@@ -1,7 +1,6 @@
 package gui;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 /*Swing Imports*/
 import java.net.URL;
 import java.util.ArrayList;
@@ -14,22 +13,20 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
-import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.JToggleButton;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import domainModel.MediaItem;
+import domainModel.Settings;
 /*Package Imports*/
 import technical.MediaPlayer;
 import technical.SOAPClient;
-import domainModel.MediaItem;
-import domainModel.Settings;
-
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
 
 public class LibraryPanel extends JPanel 
 {
