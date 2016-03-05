@@ -179,15 +179,7 @@ public class FavoritesPanel extends JPanel
 		trackScrollPane.revalidate();
 		trackScrollPane.repaint();	
 	}
-	
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-=======
 
->>>>>>> Stashed changes
-=======
->>>>>>> parent of 1441fc1... Revert "Delete class path"
 	public void queueTrack()
 	{
 		int index = trackList.getSelectedIndex();
