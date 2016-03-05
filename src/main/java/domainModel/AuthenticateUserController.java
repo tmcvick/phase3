@@ -58,6 +58,7 @@ public class AuthenticateUserController {
 	 */
 	public void setCurrUser(int select) {
 		settings.setCurrentUser(list.get(select));
+		
 	}
 
 	

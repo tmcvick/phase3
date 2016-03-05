@@ -4,6 +4,7 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
 import gui.LoginFrame;
+import gui.MyFrame;
 
 public class Main {
 
@@ -22,6 +23,11 @@ public class Main {
 		//open authentication frame
 		LoginFrame l = new LoginFrame();
 		l.setVisible(true);
+		
+		//create frame
+		MyFrame w = new MyFrame();
+		l.getLogin(w);
+				
 		
 	}
 

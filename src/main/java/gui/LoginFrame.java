@@ -1,12 +1,11 @@
 package gui;
 
-import java.awt.Color;
+import javax.swing.JFrame;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -14,17 +13,19 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
 
 import domainModel.AuthenticateUserController;
 import domainModel.User;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import net.miginfocom.swing.MigLayout;
+import javax.swing.JPasswordField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 /**
  * JFrame which displays the authentication screen
@@ -205,11 +206,11 @@ public class LoginFrame extends JFrame {
 	public void login() {
 		
 		char[] entered = passwordField.getPassword();
+		
 		if(control.checkPassword(select, entered))
 		{
-			control.setCurrUser(select);
-			screen = new MyFrame();
 			this.setVisible(false);
+			control.setCurrUser(select);
 			screen.setVisible(true);
 		}
 		else

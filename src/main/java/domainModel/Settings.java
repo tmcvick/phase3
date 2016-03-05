@@ -1,9 +1,7 @@
 package domainModel;
 
 import java.io.File;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -75,9 +73,9 @@ public class Settings {
 			String urlString = urlNode.getTextContent();
 			serverURL = new URL(urlString);
 			
-			//Node currentUserNode = root.getElementsByTagName("currentUser").item(0);
-			//Element currentUserElement = (Element) currentUserNode;
-			//currentUser = parseUser(currentUserElement);
+			Node currentUserNode = root.getElementsByTagName("currentUser").item(0);
+			Element currentUserElement = (Element) currentUserNode;
+			currentUser = parseUser(currentUserElement);
 			
 			this.albums = new HashMap<Restriction, Set<Album>>();
 			Set<Album> restrictedAlbums = new HashSet<Album>();
@@ -122,13 +120,14 @@ public class Settings {
 		Restriction access = Restriction.valueOf(restriction);
 		String imageFileName = userElement.getElementsByTagName("imageFileName").item(0).getTextContent();
 		Element favoritesElement = (Element) userElement.getElementsByTagName("favorites").item(0);
-		NodeList favoritesList = favoritesElement.getElementsByTagName("favorite");
-		Set<String> favorites = new HashSet<String>();
+		NodeList favoritesList = favoritesElement.getElementsByTagName("album");
+		Set<Album> favorites = new HashSet<Album>();
 		for (int temp = 0; temp < favoritesList.getLength(); temp++) {
 			Node albumNode = favoritesList.item(temp);
 			Element albumElement = (Element) albumNode;
-			favorites.add(albumElement.getTextContent());
+			favorites.add(parseAlbum(albumElement));
 		}
+		if (favorites.isEmpty()) favorites = null;
 		if (imageFileName.isEmpty()) imageFileName = null;
 		
 		return new User(name, PIN, admin, access, imageFileName, favorites);
@@ -140,40 +139,7 @@ public class Settings {
 		String title = albumElement.getElementsByTagName("title").item(0).getTextContent();
 		String artist = albumElement.getElementsByTagName("artist").item(0).getTextContent();
 		int ID = Integer.parseInt(albumElement.getElementsByTagName("ID").item(0).getTextContent());
-		ArrayList<MediaItem> tracks = new ArrayList<MediaItem>();
-		Element tracksElement = (Element) albumElement.getElementsByTagName("tracks").item(0);
-		NodeList tracksList = tracksElement.getElementsByTagName("track");
-		for (int temp = 0; temp < tracksList.getLength(); temp++) {
-			Node trackNode = tracksList.item(temp);
-			Element trackElement = (Element) trackNode;
-			tracks.add(parseTracks(trackElement));
-		}
 		
-		return new Album(access, tracks, title, artist, ID);
-	}
-	
-	private MediaItem parseTracks(Element trackElement) {
-		String url = trackElement.getAttribute("url");
-		URL songUrl;
-		try {
-			songUrl = new URL(url);
-		} catch (MalformedURLException e) {
-			songUrl = null;
-			e.printStackTrace();
-		}
-		String title = trackElement.getAttribute("title");
-		return new MediaItem(0, title, songUrl);
-	}
-	
-	public Album getAlbum(String title) {
-		Set<Album> albums = this.getAlbums(Restriction.Restricted);
-		for (Album item : albums) {
-			if (item.title.equalsIgnoreCase(title)) return item;
-		}
-		albums = this.getAlbums(Restriction.Unrestricted);
-		for (Album item : albums) {
-			if (item.title.equalsIgnoreCase(title)) return item;
-		}
-		return null;
+		return new Album(access, title, artist, ID);
 	}
 }

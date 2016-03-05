@@ -1,9 +1,7 @@
 package domainModel;
 
-import java.util.ArrayList;
-
 public class Album {
-
+	
 	// Private Fields
 	private Restriction access;
 	public Restriction getAccess() { return access; }
@@ -12,21 +10,11 @@ public class Album {
 	}
 	
 	// Public Fields
-	public ArrayList<MediaItem> tracks;
 	public String title;
 	public String artist;
 	public int ID;
 	
 	// Constructors
-	public Album(Restriction access, ArrayList<MediaItem> tracks, String title, String artist, int iD) {
-		super();
-		this.access = access;
-		this.tracks = tracks;
-		this.title = title;
-		this.artist = artist;
-		ID = iD;
-	}
-	
 	public Album(Restriction access, String title, String artist, int ID) {
 		super();
 		this.access = access;
@@ -44,12 +32,6 @@ public class Album {
 	}
 
 	// Auto Generated Methods
-	
-	@Override
-	public String toString() {
-		return title + " : " + artist;
-	}
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -60,6 +42,7 @@ public class Album {
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -85,5 +68,4 @@ public class Album {
 			return false;
 		return true;
 	}
-	
 }
