@@ -1,26 +1,52 @@
 package gui;
 
+import java.net.URL;
+import java.util.ArrayList;
+
+import javax.swing.DefaultListModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
-import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JToggleButton;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import domainModel.Album;
+import domainModel.MediaItem;
+import domainModel.Settings;
+import technical.MediaPlayer;
 
 public class FavoritesPanel extends JPanel 
 {
 	private static final long serialVersionUID = 1L;
 	private JToggleButton tglbtnPlay;
+	private MediaPlayer musicPlayer;
+	private DefaultListModel<Album> albumListModel;
+	private DefaultListModel<MediaItem> trackListModel;
+	private JList<MediaItem> trackList;
+	private JList<Album> albumList;
+	private boolean lock = false;
+	private ArrayList<Album> albums;
+	private Album selectedAlbum;
+	private JLabel songTitle;
+	private URL playUrl;
+	private Settings settings;
+	JScrollPane albumScrollPane;
+	JScrollPane trackScrollPane;
 	
 	public FavoritesPanel() 
 	{
+		settings = Settings.getInstance();
 		setLayout(null);
 		
-<<<<<<< HEAD
 		albums = new ArrayList<Album>();
 		if (settings.getCurrentUser().favorites != null)
 			for (String favorite : settings.getCurrentUser().favorites) 
@@ -32,7 +58,6 @@ public class FavoritesPanel extends JPanel
 		albumList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		albumScrollPane = new JScrollPane(albumList);
 		albumScrollPane.setBounds(6, 6, 267, 233);
-		albumScrollPane.setViewportView(albumList);
 		add(albumScrollPane);
 		
 		trackListModel= new DefaultListModel<MediaItem>();
@@ -40,7 +65,6 @@ public class FavoritesPanel extends JPanel
 		trackList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		trackScrollPane = new JScrollPane(trackList);
 		trackScrollPane.setBounds(300, 20, 247, 207);
-		//trackScrollPane.setViewportView(trackList);
 		add(trackScrollPane);
 		
 		albumList.addListSelectionListener(new ListSelectionListener() 
@@ -61,23 +85,6 @@ public class FavoritesPanel extends JPanel
 				if(!lock)	queueTrack();
 			}
 		});
-<<<<<<< HEAD
-=======
-=======
-		/*
->>>>>>> parent of c00de86... Uniformed Interface
-		JScrollBar favScrollBar = new JScrollBar();
-		favScrollBar.setBounds(472, 6, 15, 233);
-		add(favScrollBar);
-				
-		MyJTreeData favAlbumTree = new MyJTreeData();
-		favAlbumTree.setBounds(6, 6, 481, 233);
-<<<<<<< HEAD
-		add(favAlbumTree);
->>>>>>> parent of ec51bb5... Big Commit
-=======
-		add(favAlbumTree); */
->>>>>>> parent of c00de86... Uniformed Interface
 		
 		JProgressBar progressBar = new JProgressBar();
 		progressBar.setBounds(6, 267, 481, 20);
@@ -103,10 +110,9 @@ public class FavoritesPanel extends JPanel
 	        }
 		});
 		
-		/*TRACK NAME LABEL*/
-		JLabel label = new JLabel("<Track Name>");
-		label.setBounds(186, 251, 112, 16);
-		add(label);
+		songTitle = new JLabel("");
+		songTitle.setBounds(200, 251, 112, 16);
+		add(songTitle);
 		
 		/*NEXT TRACK BUTTON*/
 		Icon nextTrackIcon = new ImageIcon("src/main/resources/next 1.png");
@@ -120,30 +126,81 @@ public class FavoritesPanel extends JPanel
 		btnPrevTrack.setBounds(153, 283, 47, 40);
 		add(btnPrevTrack);
 	
-	
+		//showAlbumList();
 	}
 	
+	/*
+	private void showAlbumList() 
+	{
+		
+		
+		//returns set of tracks to display in track list
+		//browserLibcontroller.getTrackList(ObjID);
+		//setItems(getMediaFromServer(0));
+		
+		//displays track list in track panel
+		lock = true;
+		albumListModel.clear();
+		lock = false;
+		
+		for (int i = 0; i < albums.size(); i++)
+		{
+			trackListModel.addElement(mediaItems.get(i));
+			System.out.println(mediaItems.get(i));
+		}
+		
+		trackScrollPane.revalidate();
+		trackScrollPane.repaint();	
+	} */
+	
+	private void showTrackList() 
+	{
+		lock = true;
+		trackListModel.clear();
+		lock = false;
+		int index = albumList.getSelectedIndex();
+		selectedAlbum = albums.get(index);
+		//int objID = mediaItems.get(index).objectID;
+	
+		
+		//returns set of tracks to display in track list
+		//browserLibcontroller.getTrackList(ObjID);
+		//setItems(getMediaFromServer(objID));
+		
+		//displays track list in track panel
+		//lock = true;
+		//trackListModel.clear();
+		//lock = false;
+		
+		//for (int i = 0; i < mediaItems.size(); i++)
+		//	trackListModel.addElement(mediaItems.get(i));
+	
+		for (MediaItem item : selectedAlbum.tracks) trackListModel.addElement(item);
+		trackScrollPane.revalidate();
+		trackScrollPane.repaint();	
+	}
+	
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 <<<<<<< HEAD
 =======
 
 >>>>>>> Stashed changes
+=======
+>>>>>>> parent of 1441fc1... Revert "Delete class path"
 	public void queueTrack()
 	{
 		int index = trackList.getSelectedIndex();
-		System.out.println(index);
 		//display track name in media player 
 		if (selectedAlbum.tracks != null && index >= 0) 
 		{
-			System.out.println(selectedAlbum.tracks.size());
 			MediaItem item = selectedAlbum.tracks.get(index);
-			songTitle = new JLabel(item.title);
+			songTitle.setText(item.title);
+			
 			if (item.url != null) {
 				playUrl = item.url;
 			}
 		}
 		trackList.clearSelection();
 	}
-=======
->>>>>>> parent of ec51bb5... Big Commit
 }

@@ -4,36 +4,21 @@
 
 	<serverURL>http://127.0.0.1:5001/upnp/control/content_directory</serverURL>
 	
-	<currentUser>
-		<admin>true</admin>
-		<PIN>7777</PIN>
-		<username>defaultUser</username>
-		<access>Unrestricted</access>
-		<imageFileName></imageFileName>
-		<favorites></favorites>
-	</currentUser>
-	
 	<albums>
 		<album access="Unrestricted">
-			<title>Test</title>
+			<title>Album A</title>
 			<artist>Dylan Pyle</artist>
 			<ID>7</ID>
-		</album>
+			<tracks>
+				<track title="A Happy Song"></track></tracks></album>
 		<album access="Restricted">
-			<title>Restricted Test</title>
+			<title>Album B</title>
 			<artist>Dylan Pyle</artist>
 			<ID>13</ID>
-<<<<<<< HEAD
 			<tracks>
-<<<<<<< HEAD
 				<track title="Turing Machine"></track>
 				<track title="Supercomputer"></track>
 				<track title="Artificial"></track></tracks>
-=======
->>>>>>> parent of ec51bb5... Big Commit
-=======
-				<track title="Turing Machine"></track></tracks>
->>>>>>> parent of c00de86... Uniformed Interface
 		</album>
 	</albums>
 	
@@ -48,7 +33,7 @@
 		</user>
 		<user>
 			<admin>false</admin>
-			<favorites>Album A</favorites>
+			<favorites><favorite>Album A</favorite></favorites>
 			<imageFileName>src/main/resources/child1.png</imageFileName>
 			<PIN>1111</PIN>
 			<access>Unrestricted</access>
@@ -56,7 +41,9 @@
 		<user>
 			<access>Unrestricted</access>
 			<admin>false</admin>
-			<favorites>Album A, Album B</favorites>
+			<favorites>
+				<favorite>Album A</favorite>
+				<favorite>Album B</favorite></favorites>
 			<imageFileName>src/main/resources/child2.png</imageFileName>
 			<PIN>2222</PIN>
 			<username>Child 2</username></user>
