@@ -110,7 +110,7 @@ public class LoginFrame extends JFrame {
 		// submit button-blank until a user is clicked
 		btnSubmit = new JButton("Submit");
 
-		// actionListener for loggin in
+		// actionListener for logging in
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (passwordField.getPassword().length == 4)
@@ -135,7 +135,7 @@ public class LoginFrame extends JFrame {
 		// each label has a mouse listener
 		int i = 0, k = 0;
 		int row=0, column=0;
-		for (User user : users.values()) {
+		for (final User user : users.values()) {
 			column = (2 * k) + 2;
 			i++;
 			if(++k == 3)

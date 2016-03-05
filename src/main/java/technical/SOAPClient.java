@@ -72,6 +72,7 @@ public class SOAPClient
 		return builder.parse(is);
 	}
 
+	/*Send an obj ID to SOAP and it returns the ArrayList of Media Items under that ID*/
 	public ArrayList<MediaItem> request(int ID) throws IOException 
 	{
 		String id = Integer.toString(ID);
