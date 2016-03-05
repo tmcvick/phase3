@@ -123,7 +123,11 @@ public class FavoritesPanel extends JPanel
 	
 	}
 	
+<<<<<<< Updated upstream
 <<<<<<< HEAD
+=======
+
+>>>>>>> Stashed changes
 	public void queueTrack()
 	{
 		int index = trackList.getSelectedIndex();
