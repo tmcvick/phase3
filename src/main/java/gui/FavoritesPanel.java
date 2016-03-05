@@ -58,7 +58,6 @@ public class FavoritesPanel extends JPanel
 		albumList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		albumScrollPane = new JScrollPane(albumList);
 		albumScrollPane.setBounds(6, 6, 267, 233);
-		albumScrollPane.setViewportView(albumList);
 		add(albumScrollPane);
 		
 		trackListModel= new DefaultListModel<MediaItem>();
@@ -66,7 +65,6 @@ public class FavoritesPanel extends JPanel
 		trackList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		trackScrollPane = new JScrollPane(trackList);
 		trackScrollPane.setBounds(300, 20, 247, 207);
-		//trackScrollPane.setViewportView(trackList);
 		add(trackScrollPane);
 		
 		albumList.addListSelectionListener(new ListSelectionListener() 
@@ -87,14 +85,6 @@ public class FavoritesPanel extends JPanel
 				if(!lock)	queueTrack();
 			}
 		});
-		/*
-		JScrollBar favScrollBar = new JScrollBar();
-		favScrollBar.setBounds(472, 6, 15, 233);
-		add(favScrollBar);
-				
-		MyJTreeData favAlbumTree = new MyJTreeData();
-		favAlbumTree.setBounds(6, 6, 481, 233);
-		add(favAlbumTree); */
 		
 		JProgressBar progressBar = new JProgressBar();
 		progressBar.setBounds(6, 267, 481, 20);
@@ -120,10 +110,9 @@ public class FavoritesPanel extends JPanel
 	        }
 		});
 		
-		/*TRACK NAME LABEL*/
-		JLabel label = new JLabel("<Track Name>");
-		label.setBounds(186, 251, 112, 16);
-		add(label);
+		songTitle = new JLabel("");
+		songTitle.setBounds(200, 251, 112, 16);
+		add(songTitle);
 		
 		/*NEXT TRACK BUTTON*/
 		Icon nextTrackIcon = new ImageIcon("src/main/resources/next 1.png");
@@ -194,13 +183,12 @@ public class FavoritesPanel extends JPanel
 	public void queueTrack()
 	{
 		int index = trackList.getSelectedIndex();
-		System.out.println(index);
 		//display track name in media player 
 		if (selectedAlbum.tracks != null && index >= 0) 
 		{
-			System.out.println(selectedAlbum.tracks.size());
 			MediaItem item = selectedAlbum.tracks.get(index);
-			songTitle = new JLabel(item.title);
+			songTitle.setText(item.title);
+			
 			if (item.url != null) {
 				playUrl = item.url;
 			}
