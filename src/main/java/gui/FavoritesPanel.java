@@ -196,8 +196,9 @@ public class FavoritesPanel extends JPanel
 		int index = trackList.getSelectedIndex();
 		System.out.println(index);
 		//display track name in media player 
-		if (selectedAlbum.tracks != null) 
+		if (selectedAlbum.tracks != null && index >= 0) 
 		{
+			System.out.println(selectedAlbum.tracks.size());
 			MediaItem item = selectedAlbum.tracks.get(index);
 			songTitle = new JLabel(item.title);
 			if (item.url != null) {
