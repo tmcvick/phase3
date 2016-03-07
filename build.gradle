@@ -10,7 +10,7 @@
 apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: 'eclipse'
-apply plugin: 'jacoco'
+
 mainClassName = 'team8.Main'
 
 // In this section you declare where to find the dependencies of your project
@@ -26,7 +26,7 @@ dependencies {
  	compile 'com.squareup.okhttp3:okhttp:3.0.1'
  	compile 'com.miglayout:miglayout:3.7.2:swing@jar'
     compile 'javax.media:jmf:2.1.1e'
-    testCompile 'junit:junit:4.12'
+    
 }
 
 //create a single Jar with all dependencies
