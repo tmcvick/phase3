@@ -1,4 +1,4 @@
-package team8;
+/*package team8;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -46,3 +46,4 @@ public class SettingsTest {
 	}
 	
 }
+*/
