@@ -74,23 +74,16 @@ public class LibraryPanel extends JPanel
 		trackScrollPane.setBounds(300, 20, 247, 207);
 		add(trackScrollPane);
 		
-		//album list 
-		albumList = new JList();
-		albumList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		albumScrollPane.add(albumList);
-		albumScrollPane.setViewportView(albumList);
-		
-		
-		//track list
-		trackList = new JList();
-		trackList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		trackScrollPane.add(trackList);
-		trackScrollPane.setViewportView(trackList);
-		
 		
 		//ALBUM LIST MODEL
 		albumListModel = new DefaultListModel<MediaItem>();
+		
+		
+		//album list 
 		albumList = new JList<MediaItem>(albumListModel);
+		albumList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		albumScrollPane.add(albumList);
+		albumScrollPane.setViewportView(albumList);
 		albumList.addListSelectionListener(new ListSelectionListener() 
 		{
 			//shows selected album's track list in track panel
@@ -105,10 +98,16 @@ public class LibraryPanel extends JPanel
 					showTrackList();
 			}
 		});
+				
 		
 		//TRACK LIST MODEL
 		trackListModel= new DefaultListModel<MediaItem>();
+		
+		//track list
 		trackList = new JList<MediaItem>(trackListModel);
+		trackList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		trackScrollPane.add(trackList);
+		trackScrollPane.setViewportView(trackList);
 		trackList.addListSelectionListener(new ListSelectionListener() 
 		{
 			//shows selected track name in media player label
@@ -191,7 +190,6 @@ public class LibraryPanel extends JPanel
 	public void showAlbumList() 
 	{
 		
-		
 		//returns set of tracks to display in track list
 		//browserLibcontroller.getTrackList(ObjID);
 		setItems(getMediaFromServer(0));
@@ -203,12 +201,12 @@ public class LibraryPanel extends JPanel
 		
 		for (int i = 0; i < mediaItems.size(); i++)
 		{
-			trackListModel.addElement(mediaItems.get(i));
+			albumListModel.addElement(mediaItems.get(i));
 			System.out.println(mediaItems.get(i));
 		}
 		
-		trackScrollPane.revalidate();
-		trackScrollPane.repaint();	
+		albumScrollPane.revalidate();
+		albumScrollPane.repaint();	
 	}
 	
 	
@@ -225,9 +223,9 @@ public class LibraryPanel extends JPanel
 		setItems(getMediaFromServer(objID));
 		
 		//displays track list in track panel
-		//lock = true;
-		//trackListModel.clear();
-		//lock = false;
+		lock = true;
+		trackListModel.clear();
+		lock = false;
 		
 		for (int i = 0; i < mediaItems.size(); i++)
 			trackListModel.addElement(mediaItems.get(i));
