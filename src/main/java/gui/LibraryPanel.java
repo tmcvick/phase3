@@ -90,11 +90,12 @@ public class LibraryPanel extends JPanel
 			//enables "Add Fav" button for selected album 
 			public void valueChanged(ListSelectionEvent e)
 			{
+				
 				//checks that album is selected
 				if (albumList.getSelectedIndex() != -1)
 					btnAddFavorite.setEnabled(true);
 				
-				if(lock == false)
+				if(e.getValueIsAdjusting() == false && lock == false)
 					showTrackList();
 			}
 		});
@@ -116,7 +117,7 @@ public class LibraryPanel extends JPanel
 				//disables fav button since track is selected
 				btnAddFavorite.setEnabled(false);
 				
-				if(lock == false)
+				if(e.getValueIsAdjusting() == false)
 					queueTrack();
 			}
 		});
@@ -195,18 +196,19 @@ public class LibraryPanel extends JPanel
 		setItems(getMediaFromServer(0));
 		
 		//displays track list in track panel
-		lock = true;
+	
 		albumListModel.clear();
-		lock = false;
+		
 		
 		for (int i = 0; i < mediaItems.size(); i++)
 		{
 			albumListModel.addElement(mediaItems.get(i));
-			System.out.println(mediaItems.get(i));
+			
 		}
 		
 		albumScrollPane.revalidate();
 		albumScrollPane.repaint();	
+	
 	}
 	
 	
@@ -214,7 +216,9 @@ public class LibraryPanel extends JPanel
 	/*Populates tracklist JList with data SOAP client returns       */
 	public void showTrackList() 
 	{
+	lock = true;
 		int index = albumList.getSelectedIndex();
+		
 		int objID = mediaItems.get(index).objectID;
 	
 		
@@ -223,14 +227,30 @@ public class LibraryPanel extends JPanel
 		setItems(getMediaFromServer(objID));
 		
 		//displays track list in track panel
-		lock = true;
+		
 		trackListModel.clear();
-		lock = false;
+		boolean cleared = false;
 		
 		for (int i = 0; i < mediaItems.size(); i++)
-			trackListModel.addElement(mediaItems.get(i));
+		{
+			/*If mediaItem is an album*/
+			if(mediaItems.get(i).url == null)
+			{
+				if(cleared == false){
+					albumListModel.clear();
+					cleared = true;
+				}
+				
+				albumListModel.addElement(mediaItems.get(i));
+			}
+			else
+				trackListModel.addElement(mediaItems.get(i));
+		}
+		albumScrollPane.revalidate();
+		albumScrollPane.repaint();
 		trackScrollPane.revalidate();
 		trackScrollPane.repaint();	
+	lock = false;
 	}
 	
 	/*-------to be moved to libcontroller*/
@@ -271,6 +291,7 @@ public class LibraryPanel extends JPanel
 	/*Updates media player track listing with track selected in tracklist JList*/
 	public void queueTrack()
 	{
+	
 		int index = trackList.getSelectedIndex();
 		
 		//display track name in media player 
@@ -279,6 +300,7 @@ public class LibraryPanel extends JPanel
 			songUrl.setText(mediaItems.get(index).title);
 			playUrl = mediaItems.get(index).url;
 		}
+	
 	}
 	
 	/*Adds selected album to settings.currentUser.favorites list and downloads album*/

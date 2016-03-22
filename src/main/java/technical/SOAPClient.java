@@ -119,7 +119,7 @@ public class SOAPClient
 				if (node.getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
 					Element element = (Element) node;
 					String ID = node.getAttributes().getNamedItem("id").getNodeValue();
-					System.out.println(ID);
+					
 					int id = -1;
 					try {
 						id = Integer.parseInt(ID);
@@ -128,12 +128,12 @@ public class SOAPClient
 					}
 					String title = element.getElementsByTagName("dc:title").item(0).getChildNodes().item(0)
 							.getNodeValue();
-					System.out.println(title);
+					
 					URL link = null;
 					if (node.getNodeName().equalsIgnoreCase("item")) {
 						String urlString = element.getElementsByTagName("res").item(0).getChildNodes().item(0)
 								.getNodeValue();
-						System.out.println(urlString);
+						
 						try {
 							link = new URL(urlString);
 						} catch (MalformedURLException e) {
