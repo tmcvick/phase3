@@ -43,7 +43,7 @@ public class LibraryPanel extends JPanel
 	private JList trackList;
 	private JList albumList;
 	private ArrayList<MediaItem> mediaItems;
-	private JTextField songUrl;
+	private JLabel songUrl;
 	private URL playUrl;
 	private boolean lock = false;
 	private Settings settings;
@@ -145,9 +145,9 @@ public class LibraryPanel extends JPanel
 		});
 		
 		/*TRACK NAME LABEL*/
-		JLabel label = new JLabel("<Track Name>");
-		label.setBounds(200, 251, 112, 16);
-		add(label);
+		songUrl = new JLabel("<Track Name>");
+		songUrl.setBounds(200, 251, 112, 16);
+		add(songUrl);
 		
 		/*NEXT TRACK BUTTON*/
 		Icon nextTrackIcon = new ImageIcon("src/main/resources/next 1.png");
@@ -276,7 +276,7 @@ public class LibraryPanel extends JPanel
 		//display track name in media player 
 		if (mediaItems.get(index).url != null) 
 		{
-			songUrl.setText(mediaItems.get(index).url.toString());
+			songUrl.setText(mediaItems.get(index).title);
 			playUrl = mediaItems.get(index).url;
 		}
 	}

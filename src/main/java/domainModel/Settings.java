@@ -159,6 +159,7 @@ public class Settings {
 			songUrl = new URL(url);
 		} catch (MalformedURLException e) {
 			songUrl = null;
+			System.out.println(url);
 			e.printStackTrace();
 		}
 		String title = trackElement.getAttribute("title");
